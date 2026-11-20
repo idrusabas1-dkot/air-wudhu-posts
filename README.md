@@ -9,3 +9,5 @@ Gambar posting harian halaman Facebook Air-Wudhu.
 - `scripts/make_dkot_story.py dkot/stories`: membuat ulang semua gambar.
 - `dkot/menu/NN-nama.jpg`: 12 story menu (foto gelas asli DKOT, latar dedaunan). Ini yang dipakai jadwal sejak 20 Nov 2026; `dkot/stories` tidak dipakai lagi.
 - `dkot/cutouts/`: potongan gelas tanpa latar. `python3 scripts/make_menu_story.py dkot/cutouts dkot/menu` membuat ulang gambar menu.
+- v2 (20 Nov 2026 malam): `dkot/menu/` diganti versi lebih ramai (sinar, es & biji kopi melayang, stiker, linktree, area antar). Buat ulang: `cd scripts && python3 make_story_v2.py ../dkot/cutouts ../dkot/menu`.
+- `dkot/reels/NN-nama.mp4`: 12 Reels 15 detik dengan musik orisinal 128 BPM (`make_beat.py`, `make_reel.py`). Caption + hashtag di `dkot/reels.json`.
