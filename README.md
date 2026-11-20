@@ -7,3 +7,5 @@ Gambar posting harian halaman Facebook Air-Wudhu.
 ## DKOT Coffee (Instagram @dkot_coffee)
 - `dkot/stories/{jam}-{varian}.jpg`: story promo 1080x1920 untuk jam 07,10,12,15,18,20 WIB, 3 varian per jam (rotasi harian). Ajakan order di ShopeeFood & GrabFood + "Klik link di bio".
 - `scripts/make_dkot_story.py dkot/stories`: membuat ulang semua gambar.
+- `dkot/menu/NN-nama.jpg`: 12 story menu (foto gelas asli DKOT, latar dedaunan). Ini yang dipakai jadwal sejak 20 Nov 2026; `dkot/stories` tidak dipakai lagi.
+- `dkot/cutouts/`: potongan gelas tanpa latar. `python3 scripts/make_menu_story.py dkot/cutouts dkot/menu` membuat ulang gambar menu.
