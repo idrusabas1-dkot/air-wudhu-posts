@@ -1,0 +1,39 @@
+{
+ "_catatan": "Judul thumbnail untuk video yang BELUM rilis, kunci = project id (folder projects/). Dipakai tools/thumb_watch.py saat video muncul di Fanspage. Tanpa entri -> judul dibuat otomatis dari 'hook' meta.",
+ "20261124_204324_imam-lupa-baca-surat-pendek-ma": [
+  "SERING TERJADI!",
+  "IMAM LUPA\n*SURAT PENDEK*,\nMAKMUM *MENEGUR?*"
+ ],
+ "20261124_204324_menoleh-sedikit-saat-sholat-la": [
+  "BANYAK YANG KELIRU!",
+  "*MENOLEH* SEDIKIT\nSAAT SHOLAT,\nSHOLAT *BATAL?*"
+ ],
+ "20261124_204324_mengucapkan-sayyidina-dalam-sh": [
+  "SERING DIPERDEBATKAN",
+  "BACA *SAYYIDINA*\nSAAT TAHIYAT\nITU *DILARANG?*"
+ ],
+ "20261125_224211_dagu-wanita-terlihat-sedikit-s": [
+  "MUSLIMAH WAJIB TAHU!",
+  "*DAGU* TERLIHAT\nSAAT PAKAI MUKENA,\nSHOLAT *BATAL?*"
+ ],
+ "20261125_224211_sholat-pakai-kaos-bergambar-di": [
+  "SERING TERJADI!",
+  "*KAOS BERGAMBAR*\nDI SHAF DEPAN,\nMAKMUM *BATAL?*"
+ ],
+ "20261125_224211_sholat-memakai-mukena-warna-wa": [
+  "BANYAK YANG KELIRU!",
+  "MUKENA\n*WARNA-WARNI*,\nSHOLAT *TIDAK SAH?*"
+ ],
+ "20261126_204539_masbuk-telat-langsung-ikut-ger": [
+  "SERING TERJADI!",
+  "TELAT JAMAAH,\nLANGSUNG *RUKU*\nTANPA *TAKBIR?*"
+ ],
+ "20261126_204539_menepuk-pundak-orang-untuk-jad": [
+  "BANYAK YANG BELUM TAHU!",
+  "*TEPUK PUNDAK*\nJADI IMAM,\nADA *DALILNYA?*"
+ ],
+ "20261126_204540_sholat-sunnah-qobliyah-subuh-s": [
+  "SERING TERJADI!",
+  "*QOBLIYAH SUBUH*\nSETELAH IQOMAH,\n*BOLEH?*"
+ ]
+}

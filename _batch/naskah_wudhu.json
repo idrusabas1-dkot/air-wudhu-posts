@@ -1,0 +1,71 @@
+{
+ "adegan": [
+  {
+   "tipe": "tanya",
+   "narasi": "Assalamu'alaikum. Pernah nggak sih, kamu bertanya-tanya, kenapa sebelum sholat kita harus wudhu dulu? Yuk, kita bahas.",
+   "teks": "Kenapa harus wudhu?"
+  },
+  {
+   "tipe": "bicara",
+   "narasi": "Jawaban pertamanya, wudhu itu syarat sahnya sholat. Para ulama menyebutnya kunci pembuka sholat. Jadi sebelum sholat, kita buka dulu kuncinya.",
+   "teks": "Wudhu, kunci pembuka sholat",
+   "ikon": [
+    "tangan",
+    "masjid"
+   ]
+  },
+  {
+   "tipe": "quran",
+   "narasi": "Perintahnya datang langsung dari Allah, dalam Surat Al-Ma'idah ayat enam.",
+   "penjelasan": "Jelas ya, Allah menyebut anggota yang dibasuh. Jadi wudhu bukan sekadar kebiasaan, tapi perintah Allah bagi orang beriman yang hendak sholat.",
+   "surat": 5,
+   "ayat": 6,
+   "kutipan": "basuhlah wajahmu dan tanganmu sampai ke siku"
+  },
+  {
+   "tipe": "langkah",
+   "narasi": "Caranya? Mulai dari niat di hati, lalu basuh telapak tangan, muka, dan tangan sampai siku. Usap kepala dan telinga, lalu basuh kaki sampai mata kaki.",
+   "judul": "Cara berwudhu",
+   "langkah": [
+    "Niat di dalam hati",
+    "Basuh telapak tangan",
+    "Basuh muka dan tangan",
+    "Usap kepala dan telinga",
+    "Basuh kaki sampai mata kaki"
+   ]
+  },
+  {
+   "tipe": "hadits",
+   "narasi": "Wudhu juga membawa kabar gembira. Dari Utsman bin Affan radhiyallahu 'anhu, Rasulullah shallallahu 'alaihi wa sallam bersabda.",
+   "penjelasan": "Dengan catatan, wudhunya sempurna. Dalam riwayat Ahmad juga disebut, kesalahan dari anggota yang dibasuh keluar bersama air wudhu.",
+   "kutipan": "Tidaklah seorang hamba melaksanakan wudhu dengan sempurna, melainkan Allah akan mengampuni dosanya yang telah lalu dan yang akan datang.",
+   "perawi": "Dari Utsman bin Affan"
+  },
+  {
+   "tipe": "poin",
+   "narasi": "Jadi wudhu itu syarat sah sholat, menyucikan lahir dan batin, dan sebab turunnya ampunan. Tidaklah Allah memerintahkan sesuatu kecuali ada hikmah di baliknya.",
+   "judul": "Hikmah wudhu",
+   "poin": [
+    {
+     "ikon": "centang",
+     "teks": "Syarat sah sholat"
+    },
+    {
+     "ikon": "tetes",
+     "teks": "Menyucikan lahir dan batin"
+    },
+    {
+     "ikon": "bintang",
+     "teks": "Kesalahan berguguran"
+    }
+   ]
+  },
+  {
+   "tipe": "penutup",
+   "narasi": "Semoga bermanfaat. Yuk, wudhu dengan lebih tenang dan sempurna, karena kita sedang bersiap menghadap Allah. Wassalamu'alaikum.",
+   "tanya": "Sudah wudhu dengan sempurna?",
+   "a": "Insya Allah, sudah",
+   "b": "Mau lebih rapi lagi"
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+📑 Tahap 1: mengutip fakta & dalil per bahan (5 bahan)…
+   [1/5] detik.com: 3 kutipan
+   [2/5] konsultasisyariah.com: 4 kutipan
+   [3/5] konsultasisyariah.com: 10 kutipan
+   [4/5] genmuslim.id: 2 kutipan
+   [5/5] islamweb.net: 4 kutipan
+   15 kutipan cocok dengan bahan, 4 dibuang (tidak ditemukan di bahan)
+✍️ Tahap 2: menyusun storyboard dari fakta terverifikasi…
+   model: gemma2:9b
+🔍 Verifikasi dalil: semua dalil cocok dengan sumber
+   1. [tanya] Kamu pernah mengelap air wudhu pakai handuk?
+   2. [bicara] Banyak yang bertanya, apakah mengeringkan air wudhu dengan handuk itu makruh?
+   3. [fakta] Mayoritas ulama berpendapat boleh.
+   4. [poin] Ada perbedaan pendapat di kalangan ulama tentang hukum mengeringkan air wudhu.
+   5. [penutup] Nah, menurut kamu gimana?

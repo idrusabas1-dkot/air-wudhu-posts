@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.pyc
+*.bak*
+output/
+cache/
+*.mp4
+*.wav
+*.mp3.tmp
+ui/data/fb_accounts/
+*token*.txt

@@ -1,0 +1,59 @@
+RENDER masbuk_tanpa_takbir
+   🎙️ narasi (edge-tts)…
+   🎚️ durasi 87 dtk → kecepatan suara -2% → -9% (target ±92 dtk)
+   ⏱️ durasi 87.0 detik, 11 adegan, 2610 frame
+   🎭 cerita stickman: A = tokoh utama (wanita); B = teman (wanita) · nuansa cerah
+   🖌️ menggambar frame paralel di 8 proses…
+      0/87 detik (0%)
+      0/87 detik (0%)
+      9/87 detik (10%)
+      18/87 detik (20%)
+      29/87 detik (33%)
+      39/87 detik (44%)
+      47/87 detik (54%)
+      55/87 detik (63%)
+      63/87 detik (72%)
+      71/87 detik (81%)
+      80/87 detik (91%)
+      86/87 detik (98%)
+   ⏱️ gambar selesai dalam 171 dtk
+SELESAI masbuk_tanpa_takbir: 87.0 dtk video, render 351 dtk
+RENDER tepuk_pundak_imam
+   🎙️ narasi (edge-tts)…
+   ⏱️ durasi 89.1 detik, 11 adegan, 2673 frame
+   🎭 cerita stickman: A = tokoh utama (pria); B = teman (pria) · nuansa pastel
+   🖌️ menggambar frame paralel di 8 proses…
+      0/89 detik (0%)
+      0/89 detik (0%)
+      13/89 detik (14%)
+      21/89 detik (23%)
+      31/89 detik (34%)
+      39/89 detik (43%)
+      47/89 detik (52%)
+      55/89 detik (61%)
+      63/89 detik (70%)
+      71/89 detik (79%)
+      79/89 detik (88%)
+      88/89 detik (98%)
+   ⏱️ gambar selesai dalam 177 dtk
+SELESAI tepuk_pundak_imam: 89.1 dtk video, render 309 dtk
+RENDER qobliyah_subuh_iqamah
+   🎙️ narasi (edge-tts)…
+   🎚️ durasi 86 dtk → kecepatan suara -2% → -10% (target ±92 dtk)
+   ⏱️ durasi 86.2 detik, 11 adegan, 2586 frame
+   🎭 cerita stickman: A = tokoh utama (wanita); B = teman (wanita) · nuansa cerah
+   🖌️ menggambar frame paralel di 8 proses…
+      0/86 detik (0%)
+      0/86 detik (0%)
+      8/86 detik (9%)
+      16/86 detik (18%)
+      24/86 detik (27%)
+      33/86 detik (38%)
+      43/86 detik (49%)
+      51/86 detik (59%)
+      60/86 detik (69%)
+      69/86 detik (80%)
+      79/86 detik (91%)
+      84/86 detik (97%)
+   ⏱️ gambar selesai dalam 179 dtk
+SELESAI qobliyah_subuh_iqamah: 86.2 dtk video, render 305 dtk

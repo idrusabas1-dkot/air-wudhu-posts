@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Air Wudhu Engine</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+<style>
+:root{
+  --primary:#11493C;--primary-d:#0B352B;--bg:#F1F7F4;--panel:#FFFFFF;--panel2:#E6F3EE;--line:#DCE9E3;--line2:#C9DDD4;
+  --text:#14302B;--mute:#5B726C;--accent:#1F7A6C;--accent2:#43B0A8;--ok:#1B8A4B;--warn:#B45309;--bad:#C62828;
+  --r:14px;--shadow:0 1px 2px rgba(14,77,69,.05),0 6px 18px rgba(14,77,69,.07);--shadow-lg:0 12px 34px rgba(14,77,69,.16);
+  --ring:0 0 0 3px rgba(31,122,108,.18)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.55 "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:var(--line2);border-radius:99px;border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background:var(--accent2);background-clip:padding-box;border:2px solid transparent}
+
+/* ---------- shell ---------- */
+.app{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:22px 16px 16px;color:#fff;
+  background:radial-gradient(120% 60% at 0% 0%,#17695E 0%,transparent 60%),linear-gradient(180deg,var(--primary) 0%,var(--primary-d) 100%)}
+.brand{display:flex;align-items:center;gap:12px;padding:4px 8px 22px}
+.brand img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.55);box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.brand b{display:block;font-size:16.5px;letter-spacing:.01em;line-height:1.2}
+.brand small{color:#9FD7CC;font-size:11.5px;letter-spacing:.04em}
+#nav{display:flex;flex-direction:column;gap:4px}
+#nav button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;color:#BFE6DD;padding:11px 14px;border-radius:11px;cursor:pointer;font:inherit;font-weight:500;position:relative;transition:background .15s,color .15s}
+#nav button svg{width:19px;height:19px;flex:0 0 19px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+#nav button:hover{background:rgba(255,255,255,.08);color:#fff}
+#nav button.on{background:rgba(255,255,255,.14);color:#fff;font-weight:650;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+#nav button.on::before{content:"";position:absolute;left:-16px;top:9px;bottom:9px;width:4px;border-radius:0 4px 4px 0;background:var(--accent2)}
+.sidefoot{margin-top:auto;display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:14px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.08)}
+.sflabel{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#7FC4B7;margin-bottom:2px}
+.pill{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:9px;font-size:12.5px;color:#CFEDE6;background:transparent;border:0;cursor:default;transition:background .15s}
+.pill[style*="pointer"]:hover{background:rgba(255,255,255,.08)}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:#6FA79C;flex:0 0 8px}
+.pill.idle::before{background:#4ADE80;box-shadow:0 0 0 3px rgba(74,222,128,.18)}
+.pill.run{color:#FDE68A}.pill.run::before{background:#FBBF24;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.55)}50%{box-shadow:0 0 0 6px rgba(251,191,36,0)}}
+.content{min-width:0}
+.pagehead{padding:30px 36px 6px;max-width:1240px;margin:0 auto}
+.pagehead h1{margin:0;font-size:26px;letter-spacing:-.01em;color:var(--primary);font-weight:750}
+.pagehead p{margin:4px 0 0;color:var(--mute);font-size:14px;max-width:760px}
+main{max-width:1240px;margin:0 auto;padding:20px 36px 56px}
+.tab{display:none}.tab.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(max-width:980px){
+  .app{grid-template-columns:1fr}
+  .side{position:static;height:auto;padding:12px 12px 10px;flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px}
+  .brand{padding:0}.brand small{display:none}
+  #nav{flex-direction:row;overflow-x:auto;flex:1 1 100%;order:3}#nav button{white-space:nowrap;width:auto}#nav button.on::before{display:none}
+  .sidefoot{flex-direction:row;margin:0 0 0 auto;padding:6px 8px}.sflabel{display:none}
+  .pagehead{padding:20px 18px 0}main{padding:16px 18px 40px}
+}
+
+/* ---------- komponen ---------- */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card h2{display:flex;align-items:center;gap:9px;font-size:12px;margin:0 0 16px;color:var(--primary);text-transform:uppercase;letter-spacing:.09em;font-weight:700}
+.card h2::before{content:"";width:4px;height:15px;border-radius:3px;background:linear-gradient(180deg,var(--accent2),var(--accent))}
+label{display:block;font-size:12.5px;color:var(--mute);margin:14px 0 5px;font-weight:550}
+label:first-of-type{margin-top:0}
+input,select,textarea{width:100%;background:#F8FBFA;border:1px solid var(--line2);color:var(--text);padding:10px 12px;border-radius:10px;font:inherit;transition:border-color .15s,box-shadow .15s,background .15s}
+input::placeholder,textarea::placeholder{color:#93A8A1}
+input:hover,select:hover,textarea:hover{border-color:var(--accent2)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:var(--ring);background:#fff}
+input[type=file]{padding:7px 10px}
+input[type=file]::file-selector-button{margin-right:10px;border:0;border-radius:8px;padding:6px 12px;background:var(--panel2);color:var(--primary);font:inherit;font-weight:600;cursor:pointer}
+input[type=checkbox],input[type=radio]{accent-color:var(--accent)}
+.row{display:flex;gap:12px}.row>*{flex:1}
+.pick+.row,.hint+.row,.row+.row,.seg+.pick{margin-top:14px}.row>div>label:first-child{margin-top:0}
+a.btn{text-decoration:none}
+.hint{font-size:12px;color:var(--mute);margin-top:5px}
+code{background:var(--panel2);padding:1px 6px;border-radius:5px;font-size:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(180deg,#25897A,var(--accent));color:#fff;border:0;border-radius:10px;padding:10px 18px;font:inherit;font-weight:650;cursor:pointer;box-shadow:0 1px 2px rgba(14,77,69,.25),0 4px 12px rgba(31,122,108,.22);transition:transform .12s,box-shadow .15s,filter .15s}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.06);box-shadow:0 2px 4px rgba(14,77,69,.25),0 8px 18px rgba(31,122,108,.28)}
+.btn:active{transform:none}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.ghost{background:#fff;border:1px solid var(--line2);color:var(--primary);box-shadow:none}
+.btn.ghost:hover{background:var(--panel2);border-color:var(--accent2);box-shadow:none}
+.btn.bad{background:linear-gradient(180deg,#D93636,var(--bad));box-shadow:0 4px 12px rgba(198,40,40,.25)}
+.btn.sm{padding:5px 11px;font-size:12px;font-weight:650;border-radius:8px}
+.seg{display:flex;padding:4px;gap:4px;background:var(--panel2);border-radius:11px}
+.seg button{flex:1;background:transparent;border:0;color:var(--mute);padding:8px;border-radius:8px;cursor:pointer;font:inherit;font-weight:600;transition:all .15s}
+.seg button:hover{color:var(--primary)}
+.seg button.on{background:#fff;color:var(--primary);box-shadow:0 1px 3px rgba(14,77,69,.18)}
+.pick{display:flex;gap:8px}.pick input{flex:1}.pick button{flex:0 0 auto;white-space:nowrap}
+.bar{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}.bar>div{flex:1 1 150px}
+
+.log{background:#08201C;border:1px solid #14403A;border-radius:12px;padding:14px 16px;font:12px/1.65 "Cascadia Mono",Consolas,monospace;white-space:pre-wrap;max-height:400px;overflow:auto;color:#BFE6DD;box-shadow:inset 0 2px 10px rgba(0,0,0,.35)}
+.banner{display:flex;gap:10px;padding:12px 16px;border-radius:12px;margin-bottom:16px;font-size:13px;border:1px solid;border-left-width:4px}
+.banner.warn{background:#FFF8E1;border-color:#F3D27A;border-left-color:#F59E0B;color:#78350F}
+.banner.err{background:#FEF0F0;border-color:#F3B8B8;border-left-color:var(--bad);color:#8E1B1B}
+.banner.ok{background:#EAF7EF;border-color:#BCE3CB;border-left-color:var(--ok);color:#14532D}
+
+table{width:100%;border-collapse:separate;border-spacing:0}
+th,td{text-align:left;padding:12px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;color:var(--mute);font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:#F5FAF8;white-space:nowrap}
+th:first-child{border-top-left-radius:10px}th:last-child{border-top-right-radius:10px}
+tbody tr:last-child td,table tr:last-child td{border-bottom:0}
+table tr:not(:first-child):hover td{background:#F8FCFA}
+tr.click{cursor:pointer}
+tr.activeRow td{background:#EAF7EF!important}
+.st{font-size:11.5px;padding:3px 10px;border-radius:99px;border:1px solid var(--line2);font-weight:650;background:#fff}
+.st.running{color:#92400E;border-color:#F3D27A;background:#FFF8E1}.st.done{color:var(--ok);border-color:#BCE3CB;background:#EAF7EF}
+.st.failed,.st.stopped{color:var(--bad);border-color:#F3B8B8;background:#FEF0F0}.st.unknown{color:var(--mute)}
+.tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:99px;background:#E3F5EA;color:var(--ok);font-weight:700}
+.tag.no{background:#EEF3F1;color:var(--mute)}
+.rk{display:inline-flex;flex-direction:column;align-items:center;gap:2px;min-width:64px}.rk b{font-size:18px}.rk .st{color:#E0A100;font-size:12px;letter-spacing:1px}.rk small{font-size:11px;color:var(--mute)}.rk.top b{color:var(--accent)}
+.tag.on{background:linear-gradient(180deg,#25897A,var(--accent));color:#fff}
+.chip{padding:6px 13px;border-radius:99px;font-size:13px;font-weight:650;background:var(--panel2);color:var(--primary);border:1px solid var(--line)}
+.chip.ok{background:#EAF7EF;color:var(--ok);border-color:#BCE3CB}.chip.bad{background:#FEF0F0;color:var(--bad);border-color:#F3B8B8}
+.chip.run{background:#FFF8E1;color:#78350F;border-color:#F3D27A}
+.sumrow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+
+.results{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.vid{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.vid video{width:100%;aspect-ratio:9/16;background:#000;display:block}
+.vid .b{padding:10px;font-size:12.5px}
+.vid .cap{color:var(--mute);margin-top:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.vid .t{font-weight:600;display:flex;justify-content:space-between}
+.rtbl td{vertical-align:middle}.rtbl video{width:68px;height:121px;object-fit:cover;border-radius:9px;background:#000;cursor:pointer;display:block;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.rtbl .ttl{max-width:360px}.rtbl .ttl small{color:var(--mute);display:block;margin-top:3px}
+.rtbl input[type=datetime-local]{width:auto;min-width:205px;padding:8px 10px}
+.rtbl input[type=checkbox]{width:18px;height:18px}
+.sticky{position:sticky;bottom:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:14px 22px;margin:0 -22px -22px;border-radius:0 0 var(--r) var(--r);display:flex;gap:12px;align-items:center;z-index:5}
+.sticky .sp{flex:1;color:var(--mute);font-weight:600}
+.empty{color:var(--mute);padding:34px 24px;text-align:center;border:2px dashed var(--line2);border-radius:var(--r);background:#FAFDFC}
+
+.modal{position:fixed;inset:0;background:rgba(8,32,28,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal.on{display:flex}.modal.on .mbox{animation:pop .2s ease}
+@keyframes pop{from{opacity:0;transform:scale(.97) translateY(8px)}to{opacity:1;transform:none}}
+.mbox{background:#fff;border-radius:18px;width:min(720px,100%);max-height:92vh;overflow:auto;padding:26px;box-shadow:var(--shadow-lg)}
+.mbox h3{margin:0 0 2px;color:var(--primary);font-size:19px}
+.mbox textarea{min-height:150px;resize:vertical;font:inherit}
+.cnt{float:right;font-size:12px;font-weight:600}.cnt.bad{color:var(--bad);font-weight:700}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--line2);border-top-color:var(--accent);border-radius:50%;animation:sp .8s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+.guide{font-size:13px;line-height:1.65;color:var(--text)}
+.guide ol{padding-left:20px;margin:12px 0}.guide li{margin-bottom:9px}
+.gbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.gbtns a{text-decoration:none;display:inline-flex}
+.gtip{background:var(--panel2);border-left:4px solid var(--accent2);padding:10px 14px;border-radius:10px;margin-top:9px;color:var(--mute)}
+
+.tpl{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:22px;align-items:start}
+@media(max-width:1100px){.tpl{grid-template-columns:1fr}}
+.pvbox{position:sticky;top:16px}
+.pvbox img{width:100%;max-width:380px;display:block;margin:0 auto 6px;border-radius:16px;border:1px solid var(--line2);background:#000;aspect-ratio:9/16;box-shadow:var(--shadow-lg);transition:opacity .2s}
+.pvbox .busy{opacity:.45}
+.srow{display:grid;grid-template-columns:150px 1fr 66px;gap:12px;align-items:center;margin:10px 0}
+.srow label{margin:0}.srow .val{font-size:12.5px;font-weight:750;color:var(--primary);text-align:right;background:var(--panel2);padding:2px 8px;border-radius:7px}
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;border:0;padding:0;height:24px;box-shadow:none!important}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:99px;background:linear-gradient(90deg,var(--accent) var(--p,50%),var(--line) var(--p,50%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--accent);margin-top:-7px;box-shadow:0 2px 6px rgba(14,77,69,.35);transition:transform .12s}
+input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.12)}
+.chk{display:flex;align-items:center;gap:9px;margin:12px 0;color:var(--text);font-size:13.5px;font-weight:500;cursor:pointer}.chk input{width:18px;height:18px}
+input[type=color]{padding:3px;cursor:pointer;border-radius:10px}
+.fileline{display:flex;align-items:center;gap:12px;margin:8px 0;flex-wrap:wrap}
+.fileline img{height:48px;max-width:130px;object-fit:contain;background:repeating-conic-gradient(#e5efe9 0 25%,#fff 0 50%) 50%/12px 12px;border:1px solid var(--line2);border-radius:9px}
+.fileline .nm{font-size:12px;color:var(--mute);flex:1;min-width:120px;word-break:break-all}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.dirty{color:var(--warn);font-weight:700;font-size:13px}
+.acctbl th,.acctbl td{vertical-align:middle}
+.acctbl .mono{font:12px "Cascadia Mono",Consolas,monospace;color:var(--mute)}
+.subtabs{display:inline-flex;gap:4px;background:var(--panel2);padding:4px;border-radius:12px;margin-bottom:18px;border:1px solid var(--line)}
+.subtabs button{border:0;background:transparent;padding:9px 20px;border-radius:9px;font:inherit;font-weight:650;color:var(--mute);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.subtabs button.on{background:#fff;color:var(--primary);box-shadow:var(--shadow)}
+.subtabs .fbi{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:5px;background:#1877F2;color:#fff;font-weight:800;font-size:13px;line-height:1}
+.subtabs .yti{display:inline-grid;place-items:center;width:20px;height:14px;border-radius:4px;background:#FF0000;color:#fff;font-size:8px}
+.ftbl td{vertical-align:middle}.ftbl textarea{min-height:92px;min-width:260px;font-size:13px}
+.ftbl video{width:68px;height:121px;object-fit:cover;border-radius:9px;background:#000;cursor:pointer;display:block;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.ftbl input[type=datetime-local]{width:auto;min-width:205px;padding:8px 10px}.ftbl input[type=checkbox]{width:18px;height:18px}
+.brand .logo{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.55);box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.fxgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px}@media(max-width:700px){.fxgrid{grid-template-columns:1fr}}
+.fxgrid .chk{margin:6px 0;align-items:flex-start}.fxgrid .chk small{display:block;color:var(--mute);font-size:12px}
+.ok{color:var(--ok);font-weight:650}.bad{color:var(--bad);font-weight:650}
+/* ---------- khusus Air Wudhu ---------- */
+.side{background:radial-gradient(120% 60% at 0% 0%,#1D6B57 0%,transparent 60%),linear-gradient(180deg,var(--primary) 0%,var(--primary-d) 100%)}
+.studio{display:grid;grid-template-columns:300px minmax(0,1fr);gap:20px;align-items:start}
+@media(max-width:1100px){.studio{grid-template-columns:1fr}}
+.plist{display:flex;flex-direction:column;gap:8px;max-height:calc(100vh - 330px);overflow:auto;padding-right:4px}
+.pitem{border:1px solid var(--line);border-radius:12px;padding:11px 13px;cursor:pointer;background:#fff;transition:all .15s}
+.pitem:hover{border-color:var(--accent2);box-shadow:var(--shadow)}
+.pitem.on{border-color:var(--accent);background:#EEF8F4;box-shadow:inset 3px 0 0 var(--accent)}
+.pitem b{display:block;font-size:13.5px;line-height:1.35}
+.pitem small{color:var(--mute);font-size:11.5px}
+.steps{display:flex;gap:6px;margin:4px 0 16px;flex-wrap:wrap}
+.steps span{font-size:12px;font-weight:700;padding:5px 12px;border-radius:99px;background:var(--panel2);color:var(--mute);border:1px solid var(--line)}
+.steps span.done{background:#EAF7EF;color:var(--ok);border-color:#BCE3CB}
+.steps span.cur{background:linear-gradient(180deg,#25897A,var(--accent));color:#fff;border-color:transparent}
+.srcs td{vertical-align:top}.srcs .t{font-weight:650}.srcs .t a{color:var(--text);text-decoration:none}.srcs .t a:hover{color:var(--accent);text-decoration:underline}
+.srcs .pv{font-size:12px;color:var(--mute);white-space:pre-wrap;max-height:180px;overflow:auto;background:#F8FBFA;border:1px solid var(--line);border-radius:9px;padding:9px;margin-top:6px;display:none}
+.srcs input[type=checkbox]{width:18px;height:18px}
+.qs{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:99px;background:#FFF4D6;color:#8A5A00;margin:2px 3px 0 0}
+.scene{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;background:#fff}
+.scene.bad{border-color:#F3B8B8;box-shadow:inset 4px 0 0 var(--bad)}.scene.okd{box-shadow:inset 4px 0 0 var(--ok)}
+.scene .thumb{width:150px;aspect-ratio:9/16;border-radius:10px;background:var(--panel2);border:1px solid var(--line2);object-fit:cover;cursor:zoom-in}
+.scene .hd{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.scene .hd select{width:auto;padding:5px 9px;font-weight:650}
+.scene .hd .no{font-weight:800;color:var(--primary);font-size:15px}
+.scene textarea{min-height:64px;resize:vertical}
+.scene label{margin:9px 0 4px}
+.scene .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dalil{border-radius:10px;padding:10px 12px;margin-top:10px;font-size:12.5px;border:1px solid}
+.dalil.ok{background:#EAF7EF;border-color:#BCE3CB;color:#14532D}
+.dalil.cek,.dalil.gagal{background:#FEF0F0;border-color:#F3B8B8;color:#8E1B1B}
+.dalil .ar{font:26px/1.9 "Amiri","Traditional Arabic","Segoe UI",serif;direction:rtl;text-align:right;color:var(--text);margin:6px 0}
+.dalil .tr{color:var(--text);font-style:italic}
+.dalil .chk{margin:8px 0 0;font-size:12.5px}
+.big{max-width:420px;margin:0 auto;display:block;border-radius:16px;box-shadow:var(--shadow-lg)}
+.lookgrid{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:22px;align-items:start}
+@media(max-width:1100px){.lookgrid{grid-template-columns:1fr}}
+.sw{display:flex;gap:8px;flex-wrap:wrap}.sw button{width:auto}
+.themes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.themes button{border:2px solid var(--line2);border-radius:12px;padding:12px;cursor:pointer;font:inherit;font-weight:700;text-align:left}
+.themes button.on{border-color:var(--accent);box-shadow:var(--ring)}
+.themes .kertas{background:#FBF6EA;color:#23201C}.themes .papan{background:#24463B;color:#F4F1E6}.themes .malam{background:#1E2433;color:#F5F0E1}
+.colorrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.btn.bad{color:#fff}
+#lkScene{flex-wrap:wrap}#lkScene button{flex:1 0 auto;padding:7px 9px}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">💧</div><div><b>Air Wudhu</b><small>DOODLE DAKWAH ENGINE</small></div></div>
+  <nav id="nav">
+    <button data-t="studio" class="on"><svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg><span>Studio</span></button>
+    <button data-t="res"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L8 8m4-4l4 4"/><path d="M4 15v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg><span>Hasil &amp; Upload</span></button>
+    <button data-t="look"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="10" r="1.3"/><circle cx="12" cy="7.5" r="1.3"/><circle cx="15.5" cy="10" r="1.3"/><path d="M12 21a3 3 0 010-6h2"/></svg><span>Tampilan</span></button>
+    <button data-t="set"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg><span>Pengaturan</span></button>
+    <button data-t="acc"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg><span>Akun Facebook</span></button>
+    <button data-t="jobs"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Riwayat Job</span></button>
+  </nav>
+  <div class="sidefoot">
+    <div class="sflabel">Status</div>
+    <span class="pill" id="pillEng">engine: …</span>
+    <span class="pill" id="pillUp">upload: …</span>
+    <span class="pill" id="pillFb" style="cursor:pointer" title="Halaman FB aktif — klik untuk ganti">halaman: …</span>
+    <span class="pill" id="pillAi">AI lokal: …</span>
+  </div>
+</aside>
+<div class="content">
+<div class="pagehead"><h1 id="pgTitle">Studio</h1><p id="pgSub"></p></div>
+<main>
+
+<!-- ============ STUDIO ============ -->
+<section class="tab on" id="t-studio">
+  <div class="studio">
+    <div>
+      <div class="card"><h2>Topik baru</h2>
+        <label>Topik / pertanyaan</label>
+        <textarea id="n_topik" style="min-height:74px" placeholder="mis. Kenapa habis berhubungan suami istri harus mandi wajib?"></textarea>
+        <label>Sudut cerita (opsional)</label>
+        <input id="n_sudut" placeholder="mis. dari sisi hikmah, untuk pengantin baru">
+        <label class="chk"><input type="checkbox" id="n_auto" checked> Langsung cari bahan di internet</label>
+        <button class="btn" id="btnNew" style="width:100%">＋ Buat proyek</button>
+        <div id="newMsg" style="margin-top:10px"></div>
+      </div>
+      <div class="card" style="padding:16px"><h2>Proyek</h2><div class="plist" id="plist"></div></div>
+    </div>
+    <div id="pdetail"><div class="empty">Buat topik baru atau pilih proyek di kiri.<br><br>
+      <span class="hint">Alur: <b>Topik → Bahan</b> (cari artikel dari situs Islam) <b>→ Naskah</b> (AI menyusun adegan doodle, dalil diverifikasi) <b>→ Setujui → Render</b>.</span></div></div>
+  </div>
+</section>
+
+<!-- ============ HASIL & UPLOAD ============ -->
+<section class="tab" id="t-res">
+  <div class="card">
+    <div class="bar">
+      <div><label>Folder hasil</label><select id="r_folder"></select></div>
+      <div><label>Halaman Facebook</label><select id="r_acc"></select></div>
+      <div style="flex:0 0 auto"><button class="btn ghost" id="r_reload">↻ Muat ulang</button></div>
+    </div>
+    <div id="resBanner" style="margin-top:14px"></div>
+    <div id="resTbl" style="margin-top:14px"></div>
+    <div class="sticky" id="resBar" style="display:none">
+      <span class="sp" id="resCnt"></span>
+      <button class="btn" id="btnUp">📅 Jadwalkan ke Facebook</button>
+    </div>
+  </div>
+  <div class="card" id="upCard" style="display:none"><h2 id="upTitle">Log upload</h2><div class="log" id="upLog"></div></div>
+</section>
+
+<!-- ============ TAMPILAN ============ -->
+<section class="tab" id="t-look">
+  <div class="lookgrid">
+    <div>
+      <div class="card"><h2>Tema latar</h2>
+        <div class="themes" id="lk_themes">
+          <button class="kertas" data-th="kertas">📄 Kertas<br><small style="font-weight:400">krem, tinta hitam</small></button>
+          <button class="papan" data-th="papan">🟩 Papan tulis<br><small style="font-weight:400">hijau, kapur putih</small></button>
+          <button class="malam" data-th="malam">🌙 Malam<br><small style="font-weight:400">biru gelap</small></button>
+        </div>
+      </div>
+      <div class="card"><h2>Warna</h2>
+        <div class="colorrow">
+          <div><label>Aksen utama</label><input type="color" data-st="accent"></div>
+          <div><label>Aksen kedua</label><input type="color" data-st="accent2"></div>
+          <div><label>Baju koko tokoh</label><input type="color" data-st="shirt"></div>
+          <div><label>Peci</label><input type="color" data-st="peci"></div>
+          <div><label>Kulit</label><input type="color" data-st="skin"></div>
+          <div><label>Celana</label><input type="color" data-st="pants"></div>
+        </div>
+      </div>
+      <div class="card"><h2>Animasi &amp; teks</h2>
+        <div class="fxgrid">
+          <label class="chk"><input type="checkbox" data-st="boil"><span>Garis bergetar<small>efek khas gambar tangan</small></span></label>
+          <label class="chk"><input type="checkbox" data-st="pen"><span>Pena menggambar<small>spidol mengikuti goresan</small></span></label>
+          <label class="chk"><input type="checkbox" data-st="header"><span>Kotak judul di atas<small>label seri + judul pendek</small></span></label>
+          <label class="chk"><input type="checkbox" data-st="beard"><span>Janggut tokoh</span></label>
+          <label class="chk"><input type="checkbox" data-st="subtitles"><span>Subtitle narasi<small>untuk penonton tanpa suara</small></span></label>
+          <label class="chk"><input type="checkbox" data-st="watermark"><span>Watermark @akun</span></label>
+        </div>
+        <div class="srow"><label>Ukuran subtitle</label><input type="range" min="36" max="72" step="2" data-st="sub_size"><span class="val" id="v_sub_size"></span></div>
+        <label>Transisi antar adegan</label>
+        <div class="seg" id="lk_trans"><button data-v="variasi">Variasi ✨</button><button data-v="geser">Geser</button><button data-v="lingkar">Riak air</button><button data-v="tinta">Tinta</button><button data-v="hapus">Pudar</button><button data-v="tidak">Potong</button></div>
+        <label>Figur ustad (dari gambar assets/figur-ustad.jpeg)</label>
+        <div class="seg" id="lk_figur"><button data-v="asli">Asli</button><button data-v="kartun">Kartun</button><button data-v="doodle">Doodle tegas</button><button data-v="tokoh">Tokoh gambar</button></div>
+        <label>Efek visual (gelembung, zoom kamera, ledakan, bar progres)</label>
+        <div class="seg" id="lk_fx"><button data-v="off">Mati</button><button data-v="halus">Halus</button><button data-v="sedang">Sedang</button><button data-v="maksimal">Maksimal</button></div>
+        <label class="chk"><input type="checkbox" data-st="ilustrasi"><span>Ilustrasi tokoh cerita<small>istri, suami, anak, ibu, ayah, bayi, dll. digambar & berekspresi saat disebut</small></span></label>
+        <label class="chk"><input type="checkbox" data-st="dunia"><span>Dunia sinematik<small>latar berlapis + panggung hidup: hewan, figuran, mobil, hujan, petir, pelangi, efek emosi</small></span></label>
+        <label>Tata letak</label>
+        <div class="seg" id="lk_tata"><button data-v="pojok">Cerita besar · ustad pojok</button><button data-v="tengah">Ustad tengah (lama)</button></div>
+        <label class="chk"><input type="checkbox" data-st="cerita_stik"><span>Cerita stickman<small>alur cerita diperagakan stickman saat Gus Idrus menjelaskan (tata letak pojok)</small></span></label>
+        <label>Hologram tiap kata Gus Idrus (proyektor, panel kata, ikon 3D)</label>
+        <div class="seg" id="lk_holo"><button data-v="semua">Semua kata</button><button data-v="penting">Kata penting</button><button data-v="off">Mati</button></div>
+        <label class="chk"><input type="checkbox" data-st="kata_gambar"><span>Gambar per kata<small>kata penting memunculkan gambar & efek</small></span></label>
+        <label class="chk"><input type="checkbox" data-st="sub_karaoke"><span>Subtitle sorot kata<small>kata yang diucapkan menyala</small></span></label>
+      </div>
+      <div class="card"><h2>Suara</h2>
+        <div class="fxgrid">
+          <label class="chk"><input type="checkbox" data-st="sfx"><span>Efek suara<small>pop, centang, kertas</small></span></label>
+          <label class="chk"><input type="checkbox" data-st="bgm"><span>Musik latar<small>taruh mp3 di assets/bgm (opsional)</small></span></label>
+        </div>
+        <div class="srow"><label>Volume efek</label><input type="range" min="0" max="1" step="0.05" data-st="sfx_volume"><span class="val" id="v_sfx_volume"></span></div>
+        <div class="srow"><label>Volume musik</label><input type="range" min="0" max="0.4" step="0.01" data-st="bgm_volume"><span class="val" id="v_bgm_volume"></span></div>
+        <div class="hint">Banyak penonton konten dakwah lebih nyaman tanpa musik — default mati.</div>
+      </div>
+    </div>
+    <div class="pvbox">
+      <div class="card">
+        <h2>Preview <span id="lkStat" style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--mute)"></span></h2>
+        <img id="lkImg" alt="Preview tampilan" style="width:100%;max-width:360px;display:block;margin:0 auto 10px;border-radius:16px;border:1px solid var(--line2);aspect-ratio:9/16;box-shadow:var(--shadow-lg)">
+        <div class="seg" id="lkScene"></div>
+        <div class="hint" style="margin-top:8px">Contoh adegan dengan pengaturan di kiri (gambar diam, saat semua elemen sudah tergambar).</div>
+      </div>
+      <div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn" id="lkSave">💾 Simpan tampilan</button>
+        <button class="btn ghost" id="lkReset">↺ Bawaan</button>
+        <span id="lkDirty" class="dirty"></span>
+      </div>
+      <div id="lkMsg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PENGATURAN ============ -->
+<section class="tab" id="t-set">
+  <div id="setBanner"></div>
+  <div class="grid">
+    <div>
+      <div class="card"><h2>Umum</h2>
+        <label>Folder hasil</label><div class="pick"><input id="c_output_dir"><button class="btn ghost" data-pick="c_output_dir">📁 Pilih</button></div>
+        <label>Folder kerja sementara</label><div class="pick"><input id="c_work_dir"><button class="btn ghost" data-pick="c_work_dir">📁 Pilih</button></div>
+        <div class="hint">File sementara render (dihapus otomatis). Taruh di drive yang lega.</div>
+        <label>Nama akun (watermark &amp; ajakan follow)</label><input id="c_account_name">
+        <div class="row">
+          <div><label>Label seri (di atas judul)</label><input id="c_series_label"></div>
+          <div><label>Nama tokoh</label><input id="c_character_name"></div>
+        </div>
+      </div>
+      <div class="card"><h2>Naskah &amp; suara</h2>
+        <div class="row">
+          <div><label>Target kata narasi</label><input type="number" id="c_target_words" min="60" max="220"></div>
+          <div><label>Batas durasi (detik)</label><input type="number" id="c_max_video_sec" min="20" max="90"></div>
+        </div>
+        <div class="row">
+          <div><label>Model AI utama (Ollama)</label><input id="c_llm_model"></div>
+          <div><label>Cadangan (koma)</label><input id="c_llm_fallback"></div>
+        </div>
+        <div class="hint">Kalau RAM tidak cukup untuk model utama, engine otomatis pindah ke model cadangan yang lebih kecil.</div>
+        <div class="row">
+          <div><label>Suara narator</label><select id="c_voice"><option value="id-ID-ArdiNeural">Ardi (pria)</option><option value="id-ID-GadisNeural">Gadis (wanita)</option></select></div>
+          <div><label>Kecepatan bicara</label><input id="c_voice_rate" placeholder="+4%"></div>
+        </div>
+      </div>
+      <div class="card"><h2>Jadwal upload</h2>
+        <label>Jam tayang WIB (pisahkan koma)</label><input id="c_upload_times_wib" placeholder="05:30, 12:00, 18:30">
+      </div>
+    </div>
+    <div>
+      <div class="card"><h2>Pencarian bahan</h2>
+        <div class="row">
+          <div><label>Hasil per pencarian</label><input type="number" id="c_search_results" min="3" max="20"></div>
+          <div><label>Bahan dipakai</label><input type="number" id="c_sources_max" min="1" max="10"></div>
+          <div><label>Minimal sumber</label><input type="number" id="c_min_sources" min="1" max="8"></div>
+        </div>
+        <div class="hint">Naskah tidak bisa ditulis kalau bahan yang dicentang kurang dari "Minimal sumber" — agar video tidak tipis rujukannya.</div>
+        <label>Situs terpercaya (satu per baris) — diprioritaskan &amp; diberi tanda ✓</label>
+        <textarea id="c_trusted_domains" style="min-height:220px"></textarea>
+        <div class="hint">12 situs teratas dipakai untuk pencarian khusus (site:…); sisanya dipakai bila bahan masih kurang.</div>
+        <label>Situs diblokir</label>
+        <textarea id="c_blocked_domains" style="min-height:80px"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="card sticky" style="margin:0;position:sticky;bottom:12px;border-radius:var(--r)">
+    <span class="sp" id="setDirty"></span>
+    <button class="btn ghost" id="btnSetReset">Batalkan</button>
+    <button class="btn" id="btnSetSave">💾 Simpan pengaturan</button>
+  </div>
+</section>
+
+<!-- ============ AKUN ============ -->
+<section class="tab" id="t-acc">
+  <div id="accBanner"></div>
+  <div class="card"><h2>Halaman Facebook tersimpan</h2><div id="accTbl"></div></div>
+  <div class="grid">
+    <div class="card"><h2>Ambil dari engine lain</h2>
+      <div class="hint" style="margin-bottom:10px">Akun Halaman yang sudah disimpan di UI Criminal Reel / One Piece bisa dipakai tanpa mengisi token lagi (disalin lokal, diverifikasi ulang).</div>
+      <div id="impList"></div>
+    </div>
+    <div class="card"><h2>Tambah Halaman baru</h2>
+      <label>Nama akun (bebas)</label><input id="a_name" placeholder="Air Wudhu">
+      <label>Page ID</label><input id="a_pid" placeholder="angka, mis. 1234567890">
+      <label>Page / User Access Token</label><input id="a_tok" type="password" placeholder="EAAG...">
+      <div class="hint">Izin: pages_manage_posts, pages_read_engagement, pages_show_list. Token disimpan lokal di ui/data/fb_accounts.</div>
+      <div style="margin-top:14px"><button class="btn" id="btnAccAdd">Verifikasi &amp; simpan</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOBS ============ -->
+<section class="tab" id="t-jobs">
+  <div class="card"><h2>Riwayat job</h2><div id="jobsTbl"></div></div>
+  <div class="card" id="jobLogCard" style="display:none"><h2 id="jobLogTitle">Log</h2><div class="log" id="jobLog"></div></div>
+</section>
+
+</main>
+</div>
+</div>
+
+<div class="modal" id="imgModal" onclick="this.classList.remove('on')"><div class="mbox" style="width:auto;padding:14px;background:transparent;box-shadow:none"><img id="imgBig" class="big" alt=""></div></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+async function api(path,opt){
+  const r=await fetch(path,opt&&opt.body?{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(opt.body)}:opt);
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(j.detail||r.statusText);
+  return j;
+}
+const post=(p,b)=>api(p,{body:b||{}});
+function banner(el,kind,msg){el.innerHTML=msg?`<div class="banner ${kind}">${msg}</div>`:""}
+function setLog(el,text){const atEnd=el.scrollTop+el.clientHeight>=el.scrollHeight-30;el.textContent=text||"";if(atEnd)el.scrollTop=el.scrollHeight}
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+function bigImg(src){$("#imgBig").src=src;$("#imgModal").classList.add("on")}
+
+const TITLES={studio:["Studio","Topik → bahan dari internet → naskah adegan doodle (dalil diverifikasi) → setujui → render."],
+  res:["Hasil & Upload","Tonton hasil, edit caption, lalu jadwalkan sebagai Reels ke Fanspage."],
+  look:["Tampilan","Tema, warna tokoh, efek gambar tangan, subtitle, dan suara — dengan preview."],
+  set:["Pengaturan","Folder, nama akun, model AI, suara narator, jadwal upload, dan situs sumber bahan."],
+  acc:["Akun Facebook","Halaman (Fanspage) tujuan upload lewat Graph API resmi."],
+  jobs:["Riwayat Job","Proses riset, naskah, render, dan upload yang pernah dijalankan."]};
+function go(t){
+  $$("#nav button").forEach(x=>x.classList.toggle("on",x.dataset.t===t));
+  $$(".tab").forEach(x=>x.classList.toggle("on",x.id==="t-"+t));
+  $("#pgTitle").textContent=TITLES[t][0];$("#pgSub").textContent=TITLES[t][1];
+  ({studio:loadProjects,res:loadOutputs,look:loadLook,set:loadCfg,acc:loadAcc,jobs:loadJobs})[t]();
+}
+$$("#nav button").forEach(b=>b.onclick=()=>go(b.dataset.t));
+$("#pillFb").onclick=()=>go("acc");
+
+// ---------- status
+let ST={},upJob=null,lastEngine=false;
+async function pollStatus(){
+  try{
+    ST=await api("/api/status");
+    const g=$("#pillEng"),u=$("#pillUp");
+    const KIND={research:"riset",script:"naskah",render:"render"};
+    g.textContent="engine: "+(ST.engine_running?KIND[ST.engine_kind]||ST.engine_kind:"idle");g.className="pill "+(ST.engine_running?"run":"idle");
+    u.textContent="upload: "+(ST.upload_running?"berjalan":"idle");u.className="pill "+(ST.upload_running?"run":"idle");
+    $("#pillFb").textContent="halaman: "+(ST.fb_active||"belum ada");
+    $("#pillAi").textContent="AI lokal: "+(ST.ollama?"siap":"mati");$("#pillAi").className="pill "+(ST.ollama?"idle":"");
+    if(ST.upload_running&&!upJob)upJob=ST.upload_job;
+    if(upJob)await followUpload();
+    if($("#t-studio").classList.contains("on")){
+      if(PJ&&(ST.engine_project===PJ.id||PJ.running&&PJ.running.length))await followProject();
+      if(lastEngine!==ST.engine_running){lastEngine=ST.engine_running;refreshList()}
+    }
+  }catch(e){}
+}
+
+// ---------- STUDIO
+let PLIST=[],PJ=null,PJOB=null,THUMBS={};
+const STATUS={baru:"baru",riset:"bahan siap",naskah:"naskah",render:"render…",selesai:"selesai"};
+async function loadProjects(){await refreshList();if(PJ)openProject(PJ.id,true)}
+async function refreshList(){
+  PLIST=await api("/api/projects");
+  $("#plist").innerHTML=PLIST.length?PLIST.map(p=>`<div class="pitem ${PJ&&PJ.id===p.id?"on":""}" onclick="openProject('${p.id}')">
+    <b>${esc(p.topik)}</b><small>${esc(p.created.slice(0,16))} · ${STATUS[p.status]||p.status}${p.approved?" · ✓ disetujui":""}${p.videos?` · 🎬 ${p.videos}`:""}${p.issues?` · ⚠️ ${p.issues} dalil`:""}</small></div>`).join("")
+    :`<div class="hint">Belum ada proyek.</div>`;
+}
+$("#btnNew").onclick=async()=>{
+  try{const r=await post("/api/projects",{topik:$("#n_topik").value,sudut:$("#n_sudut").value,research:$("#n_auto").checked});
+    $("#n_topik").value="";$("#n_sudut").value="";banner($("#newMsg"),"","");
+    PJOB=r.job?r.job.id:null;await refreshList();openProject(r.project.id);pollStatus()}
+  catch(e){banner($("#newMsg"),"err",esc(e.message))}
+};
+async function openProject(id,keep){
+  try{PJ=await api("/api/projects/"+id)}catch(e){PJ=null;$("#pdetail").innerHTML=`<div class="empty">${esc(e.message)}</div>`;refreshList();return}
+  if(!keep)THUMBS={};
+  $$(".pitem").forEach(x=>x.classList.toggle("on",x.getAttribute("onclick").includes(id)));
+  renderProject();
+}
+function stepState(){
+  const s=PJ.sources.length>0, n=!!PJ.script, a=PJ.approved, v=(PJ.videos||[]).length>0;
+  return [["1 Topik",true,false],["2 Bahan",s,!s],["3 Naskah",n,s&&!n],["4 Setujui",a,n&&!a],["5 Render",v,a&&!v]];
+}
+function renderProject(){
+  const p=PJ,run=p.running&&p.running.length;
+  const used=p.sources.filter(s=>s.use).length;
+  $("#pdetail").innerHTML=`
+  <div class="card">
+    <div class="steps">${stepState().map(([l,d,c])=>`<span class="${c?"cur":d?"done":""}">${d&&!c?"✓ ":""}${l}</span>`).join("")}</div>
+    <label>Topik</label><textarea id="p_topik" style="min-height:56px">${esc(p.topik)}</textarea>
+    <label>Sudut cerita</label><input id="p_sudut" value="${esc(p.sudut||"")}" placeholder="opsional">
+    <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;align-items:center">
+      <button class="btn ghost" onclick="saveTopic()">💾 Simpan topik</button>
+      <button class="btn" onclick="runStep('research')" ${run?"disabled":""}>🔎 ${p.sources.length?"Cari ulang bahan":"Cari bahan"}</button>
+      <button class="btn" onclick="runStep('script')" ${run||!used?"disabled":""}>✍️ ${p.script?"Tulis ulang naskah":"Tulis naskah"}</button>
+      <span style="flex:1"></span>
+      <button class="btn sm bad" onclick="delProject()" ${run?"disabled":""}>Hapus proyek</button>
+    </div>
+    <div id="pMsg" style="margin-top:12px"></div>
+  </div>
+  <div class="card" id="pLogCard" style="display:none"><h2 id="pLogTitle">Log</h2><div class="log" id="pLog"></div></div>
+  ${srcCard()}
+  ${p.script?scriptCard():""}
+  ${p.script?renderCard():""}`;
+  if(p.script)loadThumbs();
+  if(run)followProject();
+}
+async function saveTopic(){try{await post(`/api/projects/${PJ.id}/topic`,{topik:$("#p_topik").value,sudut:$("#p_sudut").value});banner($("#pMsg"),"ok","Topik disimpan");refreshList()}catch(e){banner($("#pMsg"),"err",esc(e.message))}}
+async function runStep(step){
+  try{
+    if(step==="research"&&PJ.sources.length&&!confirm("Cari ulang bahan? Daftar bahan hasil pencarian diganti (catatan/URL yang kamu tambah tetap)."))return;
+    if(step==="script"&&PJ.script&&!confirm("Tulis ulang naskah? Naskah sekarang (termasuk editanmu) diganti."))return;
+    await saveTopicSilent();
+    const j=await post(`/api/projects/${PJ.id}/${step}`,step==="render"?{date:$("#r_date").value}:{});PJOB=j.id;
+    PJ.running=[step];renderProject();pollStatus()}
+  catch(e){banner($("#pMsg"),"err",esc(e.message))}
+}
+async function saveTopicSilent(){if(!$("#p_topik"))return;const t=$("#p_topik").value.trim(),s=$("#p_sudut").value.trim();if(t!==PJ.topik||s!==(PJ.sudut||""))await post(`/api/projects/${PJ.id}/topic`,{topik:t,sudut:s})}
+async function delProject(){if(!confirm("Hapus proyek ini? (video yang sudah jadi di folder hasil tidak ikut terhapus)"))return;await post(`/api/projects/${PJ.id}/delete`);PJ=null;$("#pdetail").innerHTML=`<div class="empty">Proyek dihapus.</div>`;refreshList()}
+async function followProject(){
+  const jobs=await api("/api/jobs");
+  const j=PJOB?jobs.find(x=>x.id===PJOB):jobs.find(x=>x.project===PJ.id);
+  if(!j)return;PJOB=j.id;
+  const card=$("#pLogCard");if(!card)return;card.style.display="block";
+  const {log}=await api("/api/jobs/"+j.id+"/log");setLog($("#pLog"),log);
+  $("#pLogTitle").innerHTML=`Log ${esc(j.summary)} <span class="st ${j.status}">${j.status}</span>`;
+  if(j.status!=="running"&&PJ.running&&PJ.running.length){PJ.running=[];const keep=PJOB;await openProject(PJ.id);PJOB=keep;followProjectOnce()}
+}
+async function followProjectOnce(){const card=$("#pLogCard");if(!card||!PJOB)return;const j=(await api("/api/jobs")).find(x=>x.id===PJOB);if(!j)return;
+  card.style.display="block";setLog($("#pLog"),(await api("/api/jobs/"+j.id+"/log")).log);$("#pLogTitle").innerHTML=`Log ${esc(j.summary)} <span class="st ${j.status}">${j.status}</span>`}
+
+// --- bahan
+function srcCard(){
+  const s=PJ.sources, ri=PJ.riset;
+  const riset=ri&&s.length?`<div class="sumrow" style="margin-bottom:10px">
+      <span class="chip ${ri.cukup?"ok":"bad"}">${ri.cukup?"✓ bahan cukup":"⚠️ bahan kurang"}</span>
+      <span class="chip">${ri.sumber} sumber (${ri.terpercaya} terpercaya)</span>
+      <span class="chip ${ri.ayat?"ok":""}">${ri.ayat} ayat</span><span class="chip ${ri.hadits?"ok":""}">${ri.hadits} hadits</span>
+      ${ri.kata_kunci?`<span class="chip">kata kunci: ${esc(ri.kata_kunci)}</span>`:""}</div>
+      ${(ri.kurang||[]).length?`<div class="hint" style="margin-bottom:10px">⚠️ ${ri.kurang.map(esc).join(" · ")}. Naskah baru bisa ditulis bila minimal ${ri.min_sumber} sumber dipakai — tambah URL/catatan atau cari ulang.</div>`:""}`:"";
+  return `<div class="card"><h2>Bahan (${s.filter(x=>x.use).length}/${s.length} dipakai)</h2>${riset}
+  ${s.length?`<table class="srcs"><tr><th></th><th>Sumber</th><th>Isi</th></tr>${s.map((x,i)=>`<tr>
+    <td><input type="checkbox" class="suse" data-i="${i}" ${x.use?"checked":""} onchange="saveUse()"></td>
+    <td><div class="t">${x.url?`<a href="${esc(x.url)}" target="_blank">${esc(x.title||x.url)}</a>`:esc(x.title)}</div>
+      <div class="hint">${esc(x.domain)} ${x.trusted?'<span class="tag">✓ terpercaya</span>':'<span class="tag no">umum</span>'} ${x.manual?'<span class="tag on">ditambah manual</span>':""}</div>
+      <div>${(x.refs||[]).map(r=>`<span class="qs">QS ${esc(r)}</span>`).join("")}${x.hadits_n?`<span class="qs">${x.hadits_n} hadits</span>`:""}</div>
+      <div class="pv" id="spv${i}">${esc(x.preview)}</div></td>
+    <td style="white-space:nowrap"><span class="hint">${(x.chars||0).toLocaleString("id")} huruf</span><br>
+      <button class="btn sm ghost" onclick="const e=$('#spv${i}');e.style.display=e.style.display==='block'?'none':'block'">Lihat isi</button>
+      <button class="btn sm ghost" onclick="rmSrc(${i})">✕</button></td></tr>`).join("")}</table>`
+  :`<div class="empty">Belum ada bahan. Klik <b>Cari bahan</b>, tambah URL artikel, atau tulis catatan sendiri.</div>`}
+  <div class="grid" style="margin-top:16px;gap:16px">
+    <div><label>Tambah URL artikel</label><div class="pick"><input id="s_url" placeholder="https://rumaysho.com/..."><button class="btn ghost" onclick="addUrl()">＋ Tambah</button></div>
+      <div class="hint">Mis. artikel kajian yang kamu percaya. Isinya dibaca otomatis.</div></div>
+    <div><label>Atau catatan sendiri (dari kitab/ustadz)</label><input id="s_nt" placeholder="Judul catatan">
+      <textarea id="s_nx" style="min-height:70px;margin-top:6px" placeholder="Tempel penjelasan/dalil di sini…"></textarea>
+      <button class="btn sm ghost" style="margin-top:6px" onclick="addNote()">＋ Simpan catatan</button></div>
+  </div>
+  <div class="hint" style="margin-top:12px">AI hanya boleh memakai isi bahan yang dicentang. Ayat yang disebut di bahan (label <span class="qs">QS</span>) dicek ulang ke Al-Qur'an Kemenag (equran.id).</div></div>`;
+}
+async function srcPost(body){try{PJ=await post(`/api/projects/${PJ.id}/sources`,{use:$$(".suse").filter(c=>c.checked).map(c=>+c.dataset.i),...body});renderProject();refreshList()}catch(e){banner($("#pMsg"),"err",esc(e.message))}}
+const saveUse=()=>srcPost({});
+const rmSrc=i=>{if(confirm("Hapus bahan ini dari daftar?"))srcPost({remove:i})};
+async function addUrl(){const b=event.target;b.disabled=true;b.textContent="Membaca…";await srcPost({add_url:$("#s_url").value});}
+const addNote=()=>srcPost({note_title:$("#s_nt").value,note_text:$("#s_nx").value});
+
+// --- naskah
+const TYPES={tanya:"❓ Tanya (hook)",bicara:"💬 Bicara",quran:"📖 Ayat Al-Qur'an",hadits:"📜 Hadits",poin:"💡 Poin",langkah:"✅ Langkah",fakta:"⭐ Fakta besar",penutup:"👋 Penutup"};
+function scriptCard(){
+  const s=PJ.script, issues=s.adegan.filter(a=>(a.tipe==="quran"||a.tipe==="hadits")&&a.status!=="ok"&&!a.dicek).length;
+  const nw=s.adegan.reduce((n,a)=>n+(a.narasi||"").split(/\s+/).filter(Boolean).length+((a.tipe==="quran"||a.tipe==="hadits")?(a.penjelasan||"").split(/\s+/).filter(Boolean).length:0),0);
+  const ndl=s.adegan.filter(a=>a.tipe==="quran"||a.tipe==="hadits").length, tw=(CFG&&CFG.target_words)||190;
+  return `<div class="card"><h2>Naskah / storyboard</h2>
+  <div class="sumrow"><span class="chip">${s.adegan.length} adegan</span><span class="chip ${nw<tw*0.55?"bad":nw<tw*0.75?"run":"ok"}">±${nw} kata (~${Math.round(nw/2.4+s.adegan.length*0.8+ndl*9)} dtk)</span>
+    <span class="chip">${ndl} dalil · ${(s.sumber||[]).length} rujukan</span>
+    ${s.model?`<span class="chip">AI: ${esc(s.model)}</span>`:""}<span class="chip ${issues?"bad":"ok"}">${issues?`⚠️ ${issues} dalil perlu dicek`:"✓ dalil terverifikasi"}</span>
+    <span class="chip ${PJ.approved?"ok":"run"}">${PJ.approved?"✓ disetujui":"belum disetujui"}</span></div>
+  <div class="row"><div><label>Judul di layar (tandai kata penting dengan *bintang*)</label><input id="k_jp" value="${esc(s.judul_pendek)}"></div>
+    <div><label>Judul postingan FB</label><input id="k_j" value="${esc(s.judul)}"></div></div>
+  <label>Deskripsi caption</label><textarea id="k_d" style="min-height:56px">${esc(s.deskripsi)}</textarea>
+  <label>Hashtag</label><input id="k_h" value="${esc((s.hashtag||[]).join(" "))}">
+  ${factsHtml(s.fakta)}
+  <h2 style="margin-top:22px">Adegan</h2>
+  <div id="scenes">${s.adegan.map(sceneHtml).join("")}</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><select id="addType" style="width:auto">${Object.entries(TYPES).map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select>
+    <button class="btn ghost sm" onclick="addScene()">＋ Tambah adegan</button></div>
+  <div class="sticky" style="margin-top:16px"><span class="sp">${PJ.approved?"Naskah sudah disetujui — mengubah naskah akan membatalkan persetujuan.":"Cek narasi & dalil, lalu setujui."}</span>
+    <button class="btn ghost" onclick="saveScript()">💾 Simpan &amp; cek ulang</button>
+    ${PJ.approved?`<button class="btn ghost" onclick="approve(false)">Batalkan persetujuan</button>`:`<button class="btn" onclick="approve(true)">✓ Setujui naskah</button>`}</div>
+  </div>`;
+}
+function factsHtml(f){
+  if(!f)return "";
+  const L={alasan:"Alasan / hukum",dalil:"Dalil",hikmah:"Hikmah",langkah:"Tata cara",catatan:"Catatan ulama"};
+  const n=Object.values(f).reduce((a,v)=>a+v.length,0);
+  return `<details style="margin-top:16px"><summary style="cursor:pointer;font-weight:650;color:var(--primary)">📑 Fakta yang dikutip dari bahan (${n}) — dasar naskah, sudah dicocokkan ke teks asli</summary>
+    <div class="guide" style="margin-top:8px">${Object.entries(L).filter(([k])=>f[k]&&f[k].length).map(([k,l])=>`<b>${l}</b><ul style="margin:4px 0 10px">${f[k].map(x=>
+      `<li>${x.jenis==="quran"?`<span class="qs">QS ${x.surat}:${x.ayat}</span> `:x.perawi?`<span class="qs">${esc(x.perawi)}</span> `:""}${esc(x.kutipan)} ${x.url?`<a class="hint" href="${esc(x.url)}" target="_blank">sumber</a>`:""}</li>`).join("")}</ul>`).join("")}</div></details>`;
+}
+function fld(i,k,label,v,ta){return `<label>${label}</label>`+(ta?`<textarea data-i="${i}" data-k="${k}">${esc(v??"")}</textarea>`:`<input data-i="${i}" data-k="${k}" value="${esc(v??"")}">`)}
+function sceneHtml(a,i){
+  const t=a.tipe, dl=(t==="quran"||t==="hadits");
+  let f="";
+  if(t==="tanya")f=fld(i,"teks","Teks pertanyaan di layar",a.teks);
+  if(t==="bicara")f=fld(i,"teks","Teks di balon",a.teks)+fld(i,"ikon","Ikon (pisahkan koma)",(a.ikon||[]).join(", "));
+  if(t==="quran")f=`<div class="grid2">${fld(i,"surat","Nomor surat",a.surat)}${fld(i,"ayat","Nomor ayat",a.ayat)}</div>`+fld(i,"kutipan","Potongan terjemahan yang ditampilkan (dicocokkan ke teks Kemenag)",a.kutipan,1);
+  if(t==="hadits")f=fld(i,"kutipan","Kutipan hadits (harus ada di bahan)",a.kutipan,1)+fld(i,"perawi","Perawi",a.perawi);
+  if(t==="poin")f=fld(i,"judul","Judul",a.judul)+fld(i,"poin","Poin — satu per baris: ikon | teks",(a.poin||[]).map(p=>p.ikon+" | "+p.teks).join("\n"),1);
+  if(t==="langkah")f=fld(i,"judul","Judul",a.judul)+fld(i,"langkah","Langkah — satu per baris",(a.langkah||[]).join("\n"),1);
+  if(t==="fakta")f=`<div class="grid2">${fld(i,"besar","Kata besar",a.besar)}${fld(i,"kecil","Keterangan",a.kecil)}</div>`;
+  if(t==="penutup")f=fld(i,"tanya","Pertanyaan ke penonton",a.tanya)+`<div class="grid2">${fld(i,"a","Opsi A",a.a)}${fld(i,"b","Opsi B",a.b)}</div>`;
+  let d="";
+  if(dl){const ok=a.status==="ok";
+    d=`<div class="dalil ${ok?"ok":a.status||"cek"}"><b>${ok?"✓ Terverifikasi":"⚠️ Perlu dicek"}</b> — ${esc(a.catatan||"")}
+      ${a.ref_label?`<div style="margin-top:4px"><b>${esc(a.ref_label)}</b>${a.sumber?` · <a href="${esc(a.sumber)}" target="_blank">sumber</a>`:""}</div>`:""}
+      ${a.ayat_data&&a.ayat_data.arab?`<div class="ar">${esc(a.ayat_data.arab)}</div><div class="tr">${esc(a.ayat_data.terjemah)}</div>`:""}
+      ${a.tampil?`<div style="margin-top:6px">Tampil di video: <span class="tr">“${esc(a.tampil)}”</span></div>`:""}
+      ${ok?"":`<label class="chk"><input type="checkbox" class="dicek" data-i="${i}" ${a.dicek?"checked":""}> Sudah saya cek sendiri, dalil ini benar untuk topik ini</label>`}</div>`}
+  else if(a.catatan||(a.dukungan!=null&&a.dukungan<0.5))
+    d=`<div class="dalil cek">⚠️ ${a.catatan?esc(a.catatan):""}${a.dukungan!=null&&a.dukungan<0.5?` Hanya ${Math.round(a.dukungan*100)}% kata kunci adegan ini ada di bahan — kemungkinan AI menambah sendiri, cek/ubah narasinya.`:""}</div>`;
+  return `<div class="scene ${dl?(a.status==="ok"||a.dicek?"okd":"bad"):""}">
+    <img class="thumb" id="th${i}" alt="" onclick="bigImg(this.src)" ${THUMBS[i]?`src="${THUMBS[i]}"`:""}>
+    <div><div class="hd"><span class="no">${i+1}</span><select data-i="${i}" data-k="tipe" onchange="changeType(${i},this.value)">${Object.entries(TYPES).map(([k,v])=>`<option value="${k}" ${k===t?"selected":""}>${v}</option>`).join("")}</select>
+      <span style="flex:1"></span><button class="btn sm ghost" onclick="thumb(${i},true)">👁 Preview</button><button class="btn sm ghost" onclick="mv(${i},-1)">↑</button><button class="btn sm ghost" onclick="mv(${i},1)">↓</button><button class="btn sm ghost" onclick="rmScene(${i})">✕</button></div>
+    ${fld(i,"narasi","Narasi (dibacakan)",a.narasi,1)}${f}${d}</div></div>`;
+}
+function readScript(){
+  const s=JSON.parse(JSON.stringify(PJ.script));
+  s.judul_pendek=$("#k_jp").value;s.judul=$("#k_j").value;s.deskripsi=$("#k_d").value;s.hashtag=$("#k_h").value.split(/\s+/).filter(Boolean);
+  $$("#scenes [data-k]").forEach(el=>{const a=s.adegan[+el.dataset.i],k=el.dataset.k,v=el.value;
+    if(k==="ikon")a.ikon=v.split(",").map(x=>x.trim()).filter(Boolean);
+    else if(k==="poin")a.poin=v.split("\n").map(l=>l.trim()).filter(Boolean).map(l=>{const [ik,...t]=l.split("|");return t.length?{ikon:ik.trim(),teks:t.join("|").trim()}:{ikon:"bintang",teks:ik.trim()}});
+    else if(k==="langkah")a.langkah=v.split("\n").map(l=>l.trim()).filter(Boolean);
+    else if(k==="surat"||k==="ayat")a[k]=parseInt(v)||0;
+    else a[k]=v});
+  $$(".dicek").forEach(c=>s.adegan[+c.dataset.i].dicek=c.checked);
+  return s;
+}
+function changeType(i,t){PJ.script=readScript();PJ.script.adegan[i].tipe=t;$("#scenes").innerHTML=PJ.script.adegan.map(sceneHtml).join("")}
+function mv(i,d){PJ.script=readScript();const a=PJ.script.adegan,j=i+d;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];[THUMBS[i],THUMBS[j]]=[THUMBS[j],THUMBS[i]];$("#scenes").innerHTML=a.map(sceneHtml).join("")}
+function rmScene(i){if(!confirm("Hapus adegan "+(i+1)+"?"))return;PJ.script=readScript();PJ.script.adegan.splice(i,1);THUMBS={};$("#scenes").innerHTML=PJ.script.adegan.map(sceneHtml).join("");loadThumbs()}
+function addScene(){PJ.script=readScript();const t=$("#addType").value;const n={tipe:t,narasi:""};
+  if(t==="poin")n.poin=[{ikon:"lampu",teks:""}];if(t==="langkah")n.langkah=[""];
+  const at=PJ.script.adegan.length&&PJ.script.adegan[PJ.script.adegan.length-1].tipe==="penutup"?PJ.script.adegan.length-1:PJ.script.adegan.length;
+  PJ.script.adegan.splice(at,0,n);THUMBS={};$("#scenes").innerHTML=PJ.script.adegan.map(sceneHtml).join("")}
+async function saveScript(){
+  try{const dic=$$(".dicek").filter(c=>c.checked).map(c=>+c.dataset.i);
+    PJ=await post(`/api/projects/${PJ.id}/script/save`,{script:readScript()});
+    if(dic.length)PJ=await post(`/api/projects/${PJ.id}/approve`,{approved:false,checked:dic});
+    THUMBS={};renderProject();banner($("#pMsg"),"ok","Naskah disimpan & dalil dicek ulang.");refreshList()}
+  catch(e){banner($("#pMsg"),"err",esc(e.message))}
+}
+async function approve(on){
+  try{
+    if(on){const cur=JSON.stringify(readScript().adegan.map(a=>{const{dicek,...r}=a;return r})),old=JSON.stringify(PJ.script.adegan.map(a=>{const{dicek,...r}=a;return r}));
+      if(cur!==old||$("#k_jp").value!==PJ.script.judul_pendek){await saveScript()}}
+    PJ=await post(`/api/projects/${PJ.id}/approve`,{approved:on,checked:$$(".dicek").filter(c=>c.checked).map(c=>+c.dataset.i)});
+    renderProject();banner($("#pMsg"),"ok",on?"Naskah disetujui. Silakan render.":"Persetujuan dibatalkan.");refreshList()}
+  catch(e){banner($("#pMsg"),"err",esc(e.message))}
+}
+let thumbSeq=0;
+async function loadThumbs(){const seq=++thumbSeq;for(let i=0;i<PJ.script.adegan.length;i++){if(seq!==thumbSeq)return;if(!THUMBS[i])await thumb(i,false)}}
+async function thumb(i,fresh){
+  try{const r=await post("/api/preview",{script:fresh?readScript():PJ.script,index:i});THUMBS[i]=r.image;const el=$("#th"+i);if(el)el.src=r.image;if(fresh)bigImg(r.image)}catch(e){}
+}
+
+// --- render
+function renderCard(){
+  const v=PJ.videos||[];
+  return `<div class="card"><h2>Render video</h2>
+    <div class="bar"><div><label>Folder hasil (tanggal)</label><input id="r_date" value="${today()}"></div>
+      <div style="flex:0 0 auto"><button class="btn" onclick="runStep('render')" ${!PJ.approved||(PJ.running&&PJ.running.length)?"disabled":""}>🎬 Render video</button></div></div>
+    <div class="hint" style="margin-top:8px">${PJ.approved?"Render ±1–2 menit (narasi butuh internet untuk suara).":"Setujui naskah dulu untuk bisa render."}</div>
+    ${v.length?`<div class="results" style="margin-top:14px">${v.slice().reverse().map(x=>{const f=x.path.replace(/\\/g,"/").split("/");const name=f.pop(),folder=f.pop();
+      return `<div class="vid"><video src="/api/file?folder=${encodeURIComponent(folder)}&name=${encodeURIComponent(name)}#t=0.5" preload="metadata" controls></video>
+      <div class="b"><div class="t"><span>${esc(name)}</span><span>${x.duration}s</span></div><div class="cap">${esc(folder)} · ${esc(x.created||"")}</div></div></div>`}).join("")}</div>`:""}
+  </div>`;
+}
+
+// ---------- hasil & upload
+let OUT=null,upJobFollow=null;
+async function loadOutputs(){
+  const [fs,acc]=await Promise.all([api("/api/outputs"),api("/api/fb/accounts")]);
+  const cur=$("#r_folder").value;
+  $("#r_folder").innerHTML=fs.map(f=>`<option value="${esc(f.name)}">${esc(f.name)} (${f.videos} video)</option>`).join("");
+  if(cur&&fs.some(f=>f.name===cur))$("#r_folder").value=cur;
+  $("#r_acc").innerHTML=acc.accounts.length?acc.accounts.map(a=>`<option value="${esc(a.id)}"${a.active?" selected":""}>${esc(a.page_name||a.name)}</option>`).join(""):`<option value="">(belum ada — tab Akun Facebook)</option>`;
+  if(!fs.length){$("#resTbl").innerHTML=`<div class="empty">Belum ada hasil. Render video dari Studio dulu.</div>`;$("#resBar").style.display="none";return}
+  loadOutput();
+}
+async function loadOutput(){
+  const f=$("#r_folder").value;if(!f)return;
+  try{OUT=await api("/api/output?folder="+encodeURIComponent(f)+"&account="+encodeURIComponent($("#r_acc").value))}catch(e){banner($("#resBanner"),"err",esc(e.message));return}
+  banner($("#resBanner"),"","");
+  $("#resTbl").innerHTML=`<table class="ftbl"><tr><th><input type="checkbox" id="r_all" checked></th><th>Video</th><th>Info</th><th>Caption</th><th>Jadwal (WIB)</th></tr>`+
+    OUT.videos.map((v,i)=>{const up=v.uploaded;const src="/api/file?folder="+encodeURIComponent(OUT.folder)+"&name="+encodeURIComponent(v.name);
+    return `<tr><td>${up?"":`<input type="checkbox" class="rsel" data-i="${i}" checked>`}</td>
+    <td><video src="${src}#t=0.5" preload="metadata" controls></video></td>
+    <td style="min-width:180px"><b>${esc(v.name)}</b><div class="hint">${v.duration?v.duration+" detik · ":""}${v.size_mb} MB</div>
+      <div class="hint">${esc(v.topik)}</div>${(v.dalil||[]).map(d=>`<span class="qs">${esc(d)}</span>`).join("")}</td>
+    <td><textarea class="rcap" data-i="${i}">${esc(v.caption)}</textarea>
+      <div style="margin-top:6px"><button class="btn sm ghost" onclick="saveCap(${i})">💾 Simpan caption</button> <span class="hint" id="capok${i}"></span></div></td>
+    <td>${up?`<span class="tag">terjadwal</span><div class="hint">${esc(up.jadwal_wib)}</div><a class="hint" href="${esc(up.link)}" target="_blank">lihat</a>`
+      :`<input type="datetime-local" class="rwib" data-i="${i}" value="${esc(v.plan)}">`}</td></tr>`}).join("")+`</table>`;
+  $("#r_all").onchange=e=>{$$(".rsel").forEach(c=>c.checked=e.target.checked);cnt()};
+  $$(".rsel").forEach(c=>c.onchange=cnt);cnt();
+}
+function cnt(){const n=$$(".rsel").filter(c=>c.checked).length;$("#resBar").style.display=OUT&&OUT.videos.length?"flex":"none";
+  $("#resCnt").textContent=n+" video dipilih";$("#btnUp").disabled=!n||!$("#r_acc").value||ST.upload_running}
+async function saveCap(i){try{await post("/api/caption",{folder:OUT.folder,name:OUT.videos[i].name,text:$(`.rcap[data-i="${i}"]`).value});$("#capok"+i).textContent="tersimpan ✓"}catch(e){alert(e.message)}}
+$("#r_folder").onchange=loadOutput;$("#r_acc").onchange=loadOutput;$("#r_reload").onclick=loadOutputs;
+$("#btnUp").onclick=async()=>{
+  const items=$$(".rsel").filter(c=>c.checked).map(c=>({name:OUT.videos[+c.dataset.i].name,wib:$(`.rwib[data-i="${c.dataset.i}"]`).value}));
+  if(items.some(x=>!x.wib))return alert("Isi jadwal untuk semua video yang dipilih");
+  for(const c of $$(".rsel").filter(c=>c.checked)){const i=+c.dataset.i;await post("/api/caption",{folder:OUT.folder,name:OUT.videos[i].name,text:$(`.rcap[data-i="${i}"]`).value})}
+  const acc=$("#r_acc").selectedOptions[0].textContent;
+  if(!confirm(`Jadwalkan ${items.length} Reels ke Halaman "${acc}"?\n\n`+items.map(x=>x.name+" → "+x.wib.replace("T"," ")).join("\n")))return;
+  try{const j=await post("/api/upload",{folder:OUT.folder,account:$("#r_acc").value,items});upJob=j.id;banner($("#resBanner"),"ok","Upload dimulai: "+esc(j.summary));pollStatus()}
+  catch(e){banner($("#resBanner"),"err",esc(e.message))}
+};
+async function followUpload(){
+  $("#upCard").style.display="block";
+  const {log}=await api("/api/jobs/"+upJob+"/log");setLog($("#upLog"),log);
+  const j=(await api("/api/jobs")).find(x=>x.id===upJob);const st=j?j.status:"unknown";
+  $("#upTitle").innerHTML=`Log upload <span class="st ${st}">${st}</span>`;
+  if(st!=="running"){upJob=null;if($("#t-res").classList.contains("on"))loadOutput()}
+}
+
+// ---------- tampilan
+let LK=null,LKSAVED="",LKDEF=null,lkScene=0,lkSeq=0,lkTimer=null;
+const LKFMT={sub_size:v=>v+" px",sfx_volume:v=>Math.round(v*100)+"%",bgm_volume:v=>Math.round(v*100)+"%"};
+async function loadLook(){
+  const c=await api("/api/config");LK={...c.style};LKSAVED=JSON.stringify(LK);
+  if(!LKDEF)LKDEF={theme:"kertas",accent:"#1F7A6C",accent2:"#E0A100",shirt:"#3E8ED0",peci:"#2B2B2B",skin:"#F2C9A0",pants:"#4A4F5A",beard:true,boil:true,pen:true,header:true,subtitles:true,sub_size:52,watermark:true,sfx:true,sfx_volume:0.35,bgm:false,bgm_volume:0.08,transition:"variasi",figur:"asli",fx:"sedang",ilustrasi:true,dunia:true,kata_gambar:true,sub_karaoke:true,holo:"semua",tata:"pojok",cerita_stik:true};
+  if(!$("#lkScene").innerHTML)$("#lkScene").innerHTML=["Tanya","Bicara","Ayat","Poin","Langkah","Fakta","Penutup"].map((n,i)=>`<button data-i="${i}">${n}</button>`).join("");
+  fillLook();lkPreview();
+}
+function fillLook(){
+  $$("#lk_themes button").forEach(b=>b.classList.toggle("on",b.dataset.th===LK.theme));
+  $$("#t-look [data-st]").forEach(el=>{const k=el.dataset.st;if(el.type==="checkbox")el.checked=!!LK[k];else el.value=LK[k];
+    if(el.type==="range"){$("#v_"+k).textContent=(LKFMT[k]||(v=>v))(LK[k]);el.style.setProperty("--p",((LK[k]-el.min)/(el.max-el.min)*100)+"%")}});
+  $$("#lk_trans button").forEach(b=>b.classList.toggle("on",b.dataset.v===LK.transition));
+  $$("#lk_fx button").forEach(b=>b.classList.toggle("on",b.dataset.v===LK.fx));
+  $$("#lk_figur button").forEach(b=>b.classList.toggle("on",b.dataset.v===(LK.figur||"asli")));
+  $$("#lk_holo button").forEach(b=>b.classList.toggle("on",b.dataset.v===(LK.holo||"semua")));
+  $$("#lk_tata button").forEach(b=>b.classList.toggle("on",b.dataset.v===(LK.tata||"pojok")));
+  $$("#lkScene button").forEach(b=>b.classList.toggle("on",+b.dataset.i===lkScene));
+  $("#lkDirty").textContent=JSON.stringify(LK)!==LKSAVED?"● belum disimpan":"";
+}
+function lkChanged(){fillLook();clearTimeout(lkTimer);lkTimer=setTimeout(lkPreview,250)}
+$$("#lk_themes button").forEach(b=>b.onclick=()=>{LK.theme=b.dataset.th;lkChanged()});
+$$("#lk_trans button").forEach(b=>b.onclick=()=>{LK.transition=b.dataset.v;lkChanged()});
+$$("#lk_fx button").forEach(b=>b.onclick=()=>{LK.fx=b.dataset.v;lkChanged()});
+$$("#lk_figur button").forEach(b=>b.onclick=()=>{LK.figur=b.dataset.v;lkChanged()});
+$$("#lk_holo button").forEach(b=>b.onclick=()=>{LK.holo=b.dataset.v;lkChanged()});
+$$("#lk_tata button").forEach(b=>b.onclick=()=>{LK.tata=b.dataset.v;lkChanged()});
+document.addEventListener("input",e=>{const el=e.target;if(!el.dataset||!el.dataset.st||!LK)return;const k=el.dataset.st;
+  LK[k]=el.type==="checkbox"?el.checked:el.type==="range"?+el.value:el.value;lkChanged()});
+$("#lkScene").onclick=e=>{const b=e.target.closest("button");if(!b)return;lkScene=+b.dataset.i;fillLook();lkPreview()};
+async function lkPreview(){
+  const seq=++lkSeq;$("#lkImg").style.opacity=.5;
+  try{const r=await post("/api/preview",{style:LK,index:lkScene});if(seq===lkSeq){$("#lkImg").src=r.image;$("#lkStat").textContent=""}}
+  catch(e){banner($("#lkMsg"),"err",esc(e.message))}
+  if(seq===lkSeq)$("#lkImg").style.opacity=1;
+}
+$("#lkSave").onclick=async()=>{try{const c=await post("/api/config",{config:{style:LK}});LK={...c.style};LKSAVED=JSON.stringify(LK);fillLook();banner($("#lkMsg"),"ok","Tampilan disimpan — berlaku untuk render berikutnya.")}catch(e){banner($("#lkMsg"),"err",esc(e.message))}};
+$("#lkReset").onclick=()=>{LK={...LKDEF};lkChanged()};
+
+// ---------- pengaturan
+const CTXT=["output_dir","work_dir","account_name","series_label","character_name","llm_model","voice","voice_rate"],CNUM=["target_words","max_video_sec","search_results","sources_max","min_sources"];
+let SAVED=null,CFG=null;
+async function loadCfg(){CFG=await api("/api/config");SAVED=JSON.stringify(readCfgFrom(CFG));fillCfg(CFG)}
+function readCfgFrom(c){const o={};CTXT.forEach(k=>o[k]=c[k]??"");CNUM.forEach(k=>o[k]=+c[k]);o.upload_times_wib=c.upload_times_wib||[];o.llm_fallback=c.llm_fallback||[];o.trusted_domains=c.trusted_domains||[];o.blocked_domains=c.blocked_domains||[];return o}
+function fillCfg(c){
+  [...CTXT,...CNUM].forEach(k=>$("#c_"+k).value=c[k]??"");
+  $("#c_upload_times_wib").value=(c.upload_times_wib||[]).join(", ");$("#c_llm_fallback").value=(c.llm_fallback||[]).join(", ");
+  $("#c_trusted_domains").value=(c.trusted_domains||[]).join("\n");$("#c_blocked_domains").value=(c.blocked_domains||[]).join("\n");
+  $$("#t-set input,#t-set textarea,#t-set select").forEach(x=>x.oninput=dirty);dirty();
+}
+function readCfg(){
+  const c={};CTXT.forEach(k=>c[k]=$("#c_"+k).value.trim());CNUM.forEach(k=>c[k]=+$("#c_"+k).value);
+  c.upload_times_wib=$("#c_upload_times_wib").value.split(",").map(s=>s.trim()).filter(Boolean).map(s=>s.length===4?"0"+s:s);
+  c.llm_fallback=$("#c_llm_fallback").value.split(",").map(s=>s.trim()).filter(Boolean);
+  c.trusted_domains=$("#c_trusted_domains").value.split("\n").map(s=>s.trim().replace(/^https?:\/\//,"").replace(/^www\./,"").replace(/\/.*$/,"")).filter(Boolean);
+  c.blocked_domains=$("#c_blocked_domains").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  return c;
+}
+function dirty(){if(!SAVED)return;$("#setDirty").innerHTML=JSON.stringify(readCfg())!==SAVED?'<span class="dirty">● Ada perubahan belum disimpan</span>':"Semua tersimpan"}
+$("#btnSetReset").onclick=()=>fillCfg(CFG);
+$("#btnSetSave").onclick=async()=>{try{CFG=await post("/api/config",{config:readCfg()});SAVED=JSON.stringify(readCfgFrom(CFG));fillCfg(CFG);banner($("#setBanner"),"ok","Pengaturan tersimpan ke config.json")}catch(e){banner($("#setBanner"),"err",esc(e.message))}};
+document.addEventListener("click",async e=>{const b=e.target.closest("[data-pick]");if(!b)return;const inp=document.getElementById(b.dataset.pick),old=b.textContent;b.disabled=true;b.textContent="Dialog terbuka…";
+  try{const r=await api(`/api/pick?start=${encodeURIComponent(inp.value)}`);if(r.path){inp.value=r.path;dirty()}}catch(err){alert(err.message)}b.disabled=false;b.textContent=old});
+
+// ---------- akun
+async function loadAcc(){
+  const a=await api("/api/fb/accounts");
+  $("#accTbl").innerHTML=a.accounts.length?`<table class="acctbl"><tr><th>Akun</th><th>Halaman</th><th>Page ID</th><th>Verifikasi</th><th></th></tr>`+
+    a.accounts.map(x=>`<tr class="${x.active?"activeRow":""}"><td><b>${esc(x.name)}</b> ${x.active?'<span class="tag on">aktif</span>':""}</td>
+    <td>${x.link?`<a href="${esc(x.link)}" target="_blank">${esc(x.page_name)}</a>`:esc(x.page_name)}</td><td class="mono">${esc(x.page_id)}</td><td class="mono">${esc(x.verified_at)}</td>
+    <td style="white-space:nowrap">${x.active?"":`<button class="btn sm" onclick="accDo('${x.id}','activate')">Pakai</button> `}
+    <button class="btn sm ghost" onclick="accDo('${x.id}','verify')">Cek token</button> <button class="btn sm ghost" onclick="accDel('${x.id}')">Hapus</button></td></tr>`).join("")+`</table>`
+    :`<div class="empty">Belum ada Halaman. Ambil dari engine lain atau tambah baru.</div>`;
+  $("#impList").innerHTML=a.others.length?a.others.map(x=>`<div class="fileline"><span class="nm"><b>${esc(x.label)}</b> <span class="mono">(${esc(x.from)})</span></span>
+    ${x.exists?'<span class="tag">sudah ada</span>':`<button class="btn sm" onclick="accImport('${x.id}','${esc(x.from)}')">Ambil</button>`}</div>`).join("")
+    :`<div class="hint">Tidak ada akun tersimpan di engine lain.</div>`;
+}
+async function accDo(id,act){try{const r=await post(`/api/fb/accounts/${id}/${act}`);banner($("#accBanner"),"ok",act==="verify"?"Token valid: "+esc(r.page_name):"Halaman aktif diganti");loadAcc();pollStatus()}catch(e){banner($("#accBanner"),"err",esc(e.message))}}
+async function accDel(id){if(!confirm("Hapus akun "+id+" (token lokal ikut dihapus)?"))return;accDo(id,"delete")}
+async function accImport(id,src){try{const r=await post("/api/fb/import",{id,source:src});banner($("#accBanner"),"ok","Diambil: "+esc(r.page_name));loadAcc();pollStatus()}catch(e){banner($("#accBanner"),"err",esc(e.message))}}
+$("#btnAccAdd").onclick=async()=>{try{const r=await post("/api/fb/accounts",{name:$("#a_name").value,page_id:$("#a_pid").value,token:$("#a_tok").value});$("#a_tok").value="";banner($("#accBanner"),"ok","Tersimpan: "+esc(r.page_name));loadAcc();pollStatus()}catch(e){banner($("#accBanner"),"err",esc(e.message))}};
+
+// ---------- jobs
+async function loadJobs(){
+  const js=await api("/api/jobs");
+  $("#jobsTbl").innerHTML=js.length?`<table><tr><th>Mulai</th><th>Jenis</th><th>Ringkasan</th><th>Status</th><th></th></tr>`+
+    js.map(j=>`<tr class="click" onclick="showJob('${j.id}')"><td>${esc(j.started)}</td><td>${esc(j.kind)}</td><td>${esc(j.summary)}</td><td><span class="st ${j.status}">${j.status}</span></td>
+    <td>${j.status==="running"?`<button class="btn sm bad" onclick="event.stopPropagation();stopJob('${j.id}')">Stop</button>`:""}</td></tr>`).join("")+`</table>`
+    :`<div class="empty">Belum ada job.</div>`;
+}
+async function showJob(id){$("#jobLogCard").style.display="block";$("#jobLogTitle").textContent="Log "+id;setLog($("#jobLog"),(await api("/api/jobs/"+id+"/log")).log)}
+async function stopJob(id){if(confirm("Hentikan job?")){await post("/api/jobs/"+id+"/stop");loadJobs()}}
+
+pollStatus().finally(()=>go("studio"));setInterval(pollStatus,2500);
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+=== [1] Mengapa kita harus wudhu sebelum sholat (00:56:26)
+Traceback (most recent call last):
+  File "I:\AG\air-wudhu\aw_main.py", line 99, in main
+    cmd_script(p, cfg)
+    ~~~~~~~~~~^^^^^^^^
+  File "I:\AG\air-wudhu\aw_main.py", line 32, in cmd_script
+    p["script"] = S.write_script(p, cfg)
+                  ~~~~~~~~~~~~~~^^^^^^^^
+  File "I:\AG\air-wudhu\aw_script.py", line 227, in write_script
+    data, model = _ask(prompt, cfg, log, 2000, check)
+                  ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "I:\AG\air-wudhu\aw_script.py", line 102, in _ask
+    raise RuntimeError(f"LLM gagal: {err}")
+RuntimeError: LLM gagal: timed out
+📁 Proyek: 20261115_005626_mengapa-kita-harus-wudhu-sebel
+🔎 Mencari bahan: Mengapa kita harus wudhu sebelum sholat
+   ⚠️ cari 'Mengapa kita harus wudhu sebelum sholat (site:rumaysho.com OR site:muslim.or.id OR site:muslimah.or.id OR site:konsultasisyariah.com OR site:almanhaj.or.id OR site:nu.or.id)': No results found.
+   ⚠️ cari 'Mengapa kita harus wudhu sebelum sholat': No results found.
+   ⚠️ cari 'Mengapa kita harus wudhu sebelum sholat dalil': No results found.
+   7 hasil pencarian
+   📄 almanhaj.or.id (4449 huruf, 0 rujukan ayat) ✓ terpercaya
+   📄 kepri.nu.or.id (5689 huruf, 1 rujukan ayat) ✓ terpercaya
+   📄 rumaysho.com (15686 huruf, 1 rujukan ayat) ✓ terpercaya
+   📄 rumaysho.com (24000 huruf, 0 rujukan ayat) ✓ terpercaya
+   📄 islam.nu.or.id (8509 huruf, 0 rujukan ayat) ✓ terpercaya
+   📄 jabar.nu.or.id (8733 huruf, 0 rujukan ayat) ✓ terpercaya
+✅ 6 artikel terbaca, 4 dipilih otomatis (bisa diubah di UI)
+📑 Tahap 1: mengutip fakta & dalil per bahan (4 bahan)…
+   ⚠️ gemma2:9b (konteks 6144): RAM tidak cukup
+   ⚠️ gemma2:9b (konteks 4096): RAM tidak cukup
+   [1/4] rumaysho.com: 8 kutipan
+   [2/4] kepri.nu.or.id: 7 kutipan
+   ⚠️ percobaan 1: timed out
+   ⚠️ percobaan 2: timed out
+   [3/4] almanhaj.or.id: gagal (LLM gagal: timed out)
+   ⚠️ percobaan 1: timed out
+   [4/4] rumaysho.com: 3 kutipan
+   18 kutipan cocok dengan bahan, 0 dibuang (tidak ditemukan di bahan)
+✍️ Tahap 2: menyusun storyboard dari fakta terverifikasi…
+   ⚠️ percobaan 1: timed out
+   ⚠️ percobaan 2: timed out
+❌ LLM gagal: timed out
+=== selesai [1] exit=1 (02:32:11)
+=== [2] Laki-laki mengapa harus sholat di masjid (02:32:11)
+Traceback (most recent call last):
+  File "I:\AG\air-wudhu\aw_main.py", line 99, in main
+    cmd_script(p, cfg)
+    ~~~~~~~~~~^^^^^^^^
+  File "I:\AG\air-wudhu\aw_main.py", line 32, in cmd_script
+    p["script"] = S.write_script(p, cfg)
+                  ~~~~~~~~~~~~~~^^^^^^^^
+  File "I:\AG\air-wudhu\aw_script.py", line 203, in write_script
+    facts, use, model1 = extract_facts(project, cfg, log)
+                         ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "I:\AG\air-wudhu\aw_script.py", line 137, in extract_facts
+    raise RuntimeError("Tidak ada kutipan yang bisa diambil dari bahan")
+RuntimeError: Tidak ada kutipan yang bisa diambil dari bahan
+📁 Proyek: 20261115_023212_laki-laki-mengapa-harus-sholat
+🔎 Mencari bahan: Laki-laki mengapa harus sholat di masjid
+   ⚠️ cari 'Laki-laki mengapa harus sholat di masjid dalil hikmah (site:rumaysho.com OR site:muslim.or.id OR site:muslimah.or.id OR site:konsultasisyariah.com OR site:almanhaj.or.id OR site:nu.or.id)': No results found.
+   ⚠️ cari 'Laki-laki mengapa harus sholat di masjid': No results found.
+   16 hasil pencarian
+   📄 detik.com (4424 huruf, 1 rujukan ayat) ✓ terpercaya
+   📄 detik.com (2430 huruf, 1 rujukan ayat) ✓ terpercaya
+   📄 islam.nu.or.id (8899 huruf, 0 rujukan ayat) ✓ terpercaya
+   📄 almanhaj.or.id (11496 huruf, 0 rujukan ayat) ✓ terpercaya
+   📄 muslim.or.id (10125 huruf, 4 rujukan ayat) ✓ terpercaya
+   📄 konsultasisyariah.com (3804 huruf, 0 rujukan ayat) ✓ terpercaya
+✅ 6 artikel terbaca, 4 dipilih otomatis (bisa diubah di UI)
+📑 Tahap 1: mengutip fakta & dalil per bahan (4 bahan)…
+   ⚠️ percobaan 1: timed out
+   ⚠️ percobaan 2: timed out
+   [1/4] detik.com: gagal (LLM gagal: timed out)
+   ⚠️ percobaan 1: timed out
+   ⚠️ percobaan 2: timed out
+   [2/4] detik.com: gagal (LLM gagal: timed out)
+   ⚠️ percobaan 1: timed out
+   ⚠️ percobaan 2: timed out
+   [3/4] islam.nu.or.id: gagal (LLM gagal: timed out)
+   ⚠️ percobaan 1: timed out
+   ⚠️ percobaan 2: timed out
+   [4/4] almanhaj.or.id: gagal (LLM gagal: timed out)
+❌ Tidak ada kutipan yang bisa diambil dari bahan
+=== selesai [2] exit=1 (04:33:13)
+=== [3] Mengapa istri harus patuh sama suami (04:33:13)

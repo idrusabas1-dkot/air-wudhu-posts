@@ -1,0 +1,48 @@
+RENDER kaos_bergambar_makmum
+   🎙️ narasi (edge-tts)…
+   🎚️ durasi 79 dtk → kecepatan suara -2% → -10% (target ±92 dtk)
+   ⏱️ durasi 84.6 detik, 11 adegan, 2538 frame
+   🎭 cerita stickman: A = tokoh utama (pria); B = teman (pria) · nuansa cerah
+   🖌️ menggambar frame paralel di 8 proses…
+      0/85 detik (0%)
+      8/85 detik (9%)
+      24/85 detik (28%)
+      32/85 detik (37%)
+      47/85 detik (55%)
+      57/85 detik (67%)
+      71/85 detik (83%)
+      83/85 detik (98%)
+   ⏱️ gambar selesai dalam 112 dtk
+SELESAI kaos_bergambar_makmum: 84.6 dtk video, render 275 dtk
+RENDER mukena_warna_warni
+   🎙️ narasi (edge-tts)…
+   🎚️ durasi 78 dtk → kecepatan suara -2% → -10% (target ±92 dtk)
+   ⏱️ durasi 83.2 detik, 10 adegan, 2495 frame
+   🎭 cerita stickman: A = tokoh utama (pria); B = putri (anak perempuan) · nuansa senja
+   🖌️ menggambar frame paralel di 8 proses…
+      0/83 detik (0%)
+      8/83 detik (9%)
+      23/83 detik (27%)
+      32/83 detik (38%)
+      47/83 detik (56%)
+      56/83 detik (67%)
+      70/83 detik (84%)
+      82/83 detik (98%)
+   ⏱️ gambar selesai dalam 112 dtk
+SELESAI mukena_warna_warni: 83.2 dtk video, render 223 dtk
+RENDER dagu_terlihat_mukena
+   🎙️ narasi (edge-tts)…
+   🎚️ durasi 78 dtk → kecepatan suara -2% → -10% (target ±92 dtk)
+   ⏱️ durasi 83.6 detik, 10 adegan, 2508 frame
+   🎭 cerita stickman: A = wanita (wanita); B = teman (wanita) · nuansa komik
+   🖌️ menggambar frame paralel di 8 proses…
+      0/84 detik (0%)
+      8/84 detik (9%)
+      22/84 detik (26%)
+      32/84 detik (38%)
+      47/84 detik (56%)
+      58/84 detik (69%)
+      70/84 detik (83%)
+      82/84 detik (98%)
+   ⏱️ gambar selesai dalam 115 dtk
+SELESAI dagu_terlihat_mukena: 83.6 dtk video, render 233 dtk

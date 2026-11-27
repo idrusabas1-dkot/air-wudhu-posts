@@ -1,0 +1,550 @@
+{
+  "id": "20261120_084452_kisah-mbah-sadiman-mata-air",
+  "topik": "Kisah Mbah Sadiman mata air",
+  "sudut": "uji format kisah",
+  "created": "2026-11-20 08:44:52",
+  "status": "selesai",
+  "sources": [],
+  "script": {
+    "format": "kisah",
+    "judul_pendek": "Bukit gundul, kok keluar mata air?",
+    "judul": "Kisah Mbah Sadiman: bukit gundul yang kembali mengalirkan air",
+    "deskripsi": "Sejak 1996 Mbah Sadiman menanam beringin seorang diri di Wonogiri. Kini puluhan mata air muncul lagi.",
+    "hashtag": [
+      "#AirWudhu",
+      "#kisahinspiratif",
+      "#mataair",
+      "#wonogiri",
+      "#menanampohon"
+    ],
+    "sumber": [
+      {
+        "domain": "detik.com",
+        "url": "https://www.detik.com/jateng/berita/d-7278819/dihijaukan-mbah-sadiman-seorang-diri-begini-kondisi-terkini-bukit-gendol"
+      },
+      {
+        "domain": "detik.com (DW/Reuters)",
+        "url": "https://news.detik.com/dw/d-5518975/pernah-dianggap-gila-kakek-sadiman-berhasil-ubah-bukit-gersang-jadi-hijau"
+      },
+      {
+        "domain": "mongabay.co.id",
+        "url": "https://mongabay.co.id/2016/03/21/merawat-hutan-sadiman-bagian-2/"
+      },
+      {
+        "domain": "kompas.tv",
+        "url": "https://www.kompas.tv/article/167347/kisah-mbah-sadiman-hijaukan-250-hektar-lahan-gersang-sempat-disebut-gila"
+      },
+      {
+        "domain": "equran.id (Kemenag)",
+        "url": "https://equran.id/surat/21"
+      }
+    ],
+    "adegan": [
+      {
+        "tipe": "kisah",
+        "narasi": "Bukit yang dulu gundul ini, sekarang mengalirkan air untuk seribu lebih keluarga. Kok bisa?",
+        "judul": "Bukit gundul, kok keluar *mata air*?",
+        "kunci": [
+          "gundul",
+          "air",
+          "bisa"
+        ],
+        "shot": {
+          "latar": "mata_air",
+          "hijau": 1,
+          "kamera": "dorong",
+          "fokus": [
+            540,
+            900
+          ]
+        }
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Ini kisah Mbah Sadiman, petani dari Desa Geneng, Wonogiri, Jawa Tengah.",
+        "kunci": [
+          "sadiman",
+          "wonogiri"
+        ],
+        "shot": {
+          "latar": "bukit",
+          "hijau": 0,
+          "aksi": "jalan",
+          "x": 180,
+          "kamera": "geser",
+          "fokus": [
+            540,
+            1100
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "lokasi",
+            "a": "Geneng, Wonogiri",
+            "b": "Jawa Tengah",
+            "sumber": "detikJateng 2024",
+            "pada": "Desa"
+          },
+          {
+            "jenis": "profil",
+            "a": "Mbah Sadiman",
+            "b": "petani",
+            "sumber": "detikJateng 2024",
+            "pada": "Mbah",
+            "pos": "atas2"
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Dulu, bukit di kampungnya terbakar. Kata beliau, setelah itu airnya mati.",
+        "kunci": [
+          "terbakar",
+          "mati"
+        ],
+        "shot": {
+          "latar": "api",
+          "hijau": 0,
+          "kamera": "dorong",
+          "fokus": [
+            540,
+            900
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "kutipan",
+            "a": "Awal-awalnya gunung itu kebakaran. Terus airnya mati.",
+            "b": "kata Sadiman",
+            "sumber": "Kompas TV 2021",
+            "pada": "Kata"
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Saat kemarau, sumber air mengering. Warga susah mendapatkan air.",
+        "kunci": [
+          "kemarau",
+          "susah"
+        ],
+        "shot": {
+          "latar": "desa",
+          "hijau": 0,
+          "warga": "angkut",
+          "wx": 260,
+          "kamera": "geser",
+          "fokus": [
+            540,
+            1200
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "label",
+            "a": "sumber air kering",
+            "b": "merah",
+            "sumber": "detikJateng 2024",
+            "pada": "sumber",
+            "pos": "atas"
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Sejak 1996, Mbah Sadiman mulai menanam pohon beringin. Seorang diri.",
+        "kunci": [
+          "1996",
+          "beringin",
+          "seorang"
+        ],
+        "shot": {
+          "latar": "bukit",
+          "hijau": [
+            0,
+            0.04
+          ],
+          "aksi": "tanam",
+          "x": 340,
+          "kamera": "dorong",
+          "fokus": [
+            500,
+            1350
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "tahun",
+            "a": "1996",
+            "b": "mulai menanam beringin",
+            "sumber": "detikJateng 2024",
+            "pada": "1996"
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Waktu itu, satu bibit beringin harganya mulai lima puluh ribu rupiah. Kata warga, kambingnya pun ditukar dengan bibit.",
+        "kunci": [
+          "ribu",
+          "kambingnya",
+          "bibit"
+        ],
+        "shot": {
+          "latar": "desa",
+          "hijau": 0,
+          "aksi": "jalan",
+          "kambing": true,
+          "x": 260,
+          "kamera": "geser",
+          "fokus": [
+            540,
+            1250
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "angka",
+            "a": "Rp50 ribu",
+            "b": "",
+            "c": "per bibit beringin (1996)",
+            "sumber": "Kompas TV 2021",
+            "pada": "satu bibit"
+          },
+          {
+            "jenis": "tukar",
+            "a": "kambing",
+            "b": "bibit beringin",
+            "c": "kata warga",
+            "sumber": "DW/Reuters 2021",
+            "pada": "kambingnya",
+            "pos": "atas2"
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Orang-orang menganggapnya gila. Tapi ia terus menanam.",
+        "kunci": [
+          "gila",
+          "menanam"
+        ],
+        "shot": {
+          "latar": "bukit",
+          "hijau": [
+            0.04,
+            0.12
+          ],
+          "aksi": "cangkul",
+          "warga": "tunjuk",
+          "x": 250,
+          "wx": 470,
+          "kamera": "dorong",
+          "fokus": [
+            540,
+            1300
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "kutipan",
+            "a": "Dulu masyarakat bilang dia orang gila.",
+            "b": "Warto, warga",
+            "sumber": "DW/Reuters 2021",
+            "pada": "gila"
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Kenapa beringin? Menurut pengalamannya, beringin dan ficus bisa menyimpan banyak air. Sementara pinus, katanya, justru banyak menyedot air.",
+        "kunci": [
+          "beringin",
+          "menyimpan",
+          "pinus"
+        ],
+        "shot": {
+          "latar": "irisan",
+          "hijau": 1,
+          "kamera": "turun",
+          "fokus": [
+            540,
+            1000
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "label",
+            "a": "akar beringin",
+            "b": "coklat",
+            "pada": "beringin dan",
+            "pos": [
+              290,
+              790
+            ],
+            "ke": [
+              470,
+              880
+            ]
+          },
+          {
+            "jenis": "label",
+            "a": "air tersimpan",
+            "b": "biru",
+            "pada": "menyimpan",
+            "pos": [
+              790,
+              1480
+            ],
+            "ke": [
+              700,
+              1620
+            ]
+          },
+          {
+            "jenis": "kutipan",
+            "a": "Pohon beringin dan pohon ficus bisa menyimpan banyak air.",
+            "b": "kata Sadiman",
+            "sumber": "DW/Reuters 2021",
+            "pada": "Menurut",
+            "pos": "atas"
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Hasilnya tidak instan. Lima tahun belum terasa. Sepuluh tahun, alirannya masih kecil. Dua puluh tahun, baru terasa besar.",
+        "kunci": [
+          "instan",
+          "kecil",
+          "besar"
+        ],
+        "shot": {
+          "latar": "bukit",
+          "hijau": [
+            0.12,
+            0.7
+          ],
+          "aksi": "pikul",
+          "x": 260,
+          "kamera": "mundur",
+          "fokus": [
+            540,
+            1100
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "kutipan",
+            "a": "Sepuluh tahun aliran air masih kecil, 20 tahun baru terasa besar.",
+            "b": "kata Sadiman",
+            "sumber": "Mongabay 2016",
+            "pada": "Sepuluh"
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Kini, sekitar lima belas ribu pohon tumbuh di Bukit Gendol. Puluhan mata air muncul lagi.",
+        "kunci": [
+          "ribu",
+          "puluhan"
+        ],
+        "shot": {
+          "latar": "bukit",
+          "hijau": [
+            0.7,
+            1.0
+          ],
+          "kamera": "naik",
+          "fokus": [
+            540,
+            1000
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "angka",
+            "a": "15.000",
+            "b": "pohon",
+            "c": "kata warga",
+            "sumber": "detikJateng 2024",
+            "pada": "sekitar",
+            "hitung": 15000
+          },
+          {
+            "jenis": "label",
+            "a": "puluhan mata air muncul",
+            "b": "biru",
+            "sumber": "Mongabay 2016",
+            "pada": "Puluhan",
+            "pos": "atas2"
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Sekitar seribu seratus keluarga minum dari air bukit ini.",
+        "kunci": [
+          "keluarga",
+          "minum"
+        ],
+        "shot": {
+          "latar": "desa",
+          "hijau": 1,
+          "keran": true,
+          "warga": "antri",
+          "wx": 200,
+          "kamera": "dorong",
+          "fokus": [
+            600,
+            1300
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "angka",
+            "a": "1.100",
+            "b": "KK",
+            "c": "minum dari air bukit ini",
+            "sumber": "detikJateng 2024",
+            "pada": "Sekitar",
+            "hitung": 1100
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Petani pun bisa panen dua sampai tiga kali dalam setahun.",
+        "kunci": [
+          "panen",
+          "setahun"
+        ],
+        "shot": {
+          "latar": "sawah",
+          "hijau": 1,
+          "kamera": "geser",
+          "fokus": [
+            540,
+            1100
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "label",
+            "a": "panen 2-3x setahun",
+            "b": "hijau",
+            "sumber": "DW/Reuters 2021",
+            "pada": "panen",
+            "pos": "atas"
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Tahun 2016, Mbah Sadiman menerima penghargaan Kalpataru.",
+        "kunci": [
+          "kalpataru"
+        ],
+        "shot": {
+          "latar": "desa",
+          "hijau": 1,
+          "aksi": "bangga",
+          "x": 400,
+          "kamera": "dorong",
+          "fokus": [
+            540,
+            1350
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "penghargaan",
+            "a": "Kalpataru 2016",
+            "b": "penghargaan lingkungan",
+            "sumber": "detikJateng 2024",
+            "pada": "2016"
+          }
+        ]
+      },
+      {
+        "tipe": "kisah",
+        "narasi": "Pesannya sederhana: jangan membakar hutan terus-menerus.",
+        "kunci": [
+          "membakar"
+        ],
+        "shot": {
+          "latar": "bukit",
+          "hijau": 1,
+          "aksi": "jalan",
+          "x": 200,
+          "kamera": "mundur",
+          "fokus": [
+            540,
+            1100
+          ]
+        },
+        "kartu": [
+          {
+            "jenis": "kutipan",
+            "a": "Jangan membakar hutan terus menerus.",
+            "b": "kata Sadiman",
+            "sumber": "DW/Reuters 2021",
+            "pada": "Pesannya"
+          }
+        ]
+      },
+      {
+        "tipe": "quran",
+        "narasi": "Air memang sumber kehidupan. Allah berfirman,",
+        "surat": 21,
+        "ayat": 30,
+        "ayat_data": {
+          "surat": 21,
+          "ayat": 30,
+          "nama": "Al-Anbiya'",
+          "arab": "اَوَلَمْ يَرَ الَّذِيْنَ كَفَرُوْٓا اَنَّ السَّمٰوٰتِ وَالْاَرْضَ كَانَتَا رَتْقًا فَفَتَقْنٰهُمَاۗ وَجَعَلْنَا مِنَ الْمَاۤءِ كُلَّ شَيْءٍ حَيٍّۗ  اَفَلَا يُؤْمِنُوْنَ ",
+          "terjemah": "Apakah orang-orang kafir tidak mengetahui bahwa langit dan bumi, keduanya, dahulu menyatu, kemudian Kami memisahkan keduanya dan Kami menjadikan segala sesuatu yang hidup berasal dari air? Maka, tidakkah mereka beriman?",
+          "jumlah_ayat": 112
+        },
+        "arab_tampil": "وَجَعَلْنَا مِنَ الْمَاۤءِ كُلَّ شَيْءٍ حَيٍّۗ",
+        "tampil": "Kami menjadikan segala sesuatu yang hidup berasal dari air.",
+        "kutipan": "Kami menjadikan segala sesuatu yang hidup berasal dari air.",
+        "ref_label": "QS. Al-Anbiya': 30",
+        "status": "ok",
+        "penjelasan": "Menjaga pohon, ternyata juga menjaga air."
+      },
+      {
+        "tipe": "penutup",
+        "narasi": "Di kampungmu, masih ada mata air yang mengalir saat kemarau? Tulis di komentar, ya.",
+        "tanya": "Mata air di kampungmu masih mengalir saat kemarau?",
+        "a": "Masih",
+        "b": "Sudah kering"
+      }
+    ],
+    "masalah": 0,
+    "model": "manual (uji format kisah)"
+  },
+  "approved": true,
+  "videos": [
+    {
+      "path": "I:/AG/air-wudhu/output\\2026-11-20\\auto_video_4_final.mp4",
+      "date": "2026-11-20",
+      "duration": 95.9,
+      "created": "2026-11-20 08:49:04"
+    },
+    {
+      "path": "I:/AG/air-wudhu/output\\2026-11-20\\auto_video_4_final.mp4",
+      "date": "2026-11-20",
+      "duration": 103.3,
+      "created": "2026-11-20 08:53:01"
+    },
+    {
+      "path": "I:/AG/air-wudhu/output\\2026-11-20\\auto_video_4_final.mp4",
+      "date": "2026-11-20",
+      "duration": 103.2,
+      "created": "2026-11-20 09:04:09"
+    }
+  ],
+  "updated": "2026-11-20 09:04:09"
+}

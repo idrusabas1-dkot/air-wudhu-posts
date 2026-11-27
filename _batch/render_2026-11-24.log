@@ -1,0 +1,49 @@
+RENDER telunjuk_saat_tahiyat
+   🎙️ narasi (edge-tts)…
+   🎚️ durasi 80 dtk → kecepatan suara -2% → -10% (target ±92 dtk)
+   ⏱️ durasi 85.9 detik, 12 adegan, 2577 frame
+   🎭 cerita stickman: A = tokoh utama (pria); B = teman (pria) · nuansa malam
+   🖌️ menggambar frame paralel di 8 proses…
+      0/86 detik (0%)
+      8/86 detik (9%)
+      16/86 detik (18%)
+      31/86 detik (36%)
+      42/86 detik (48%)
+      55/86 detik (64%)
+      67/86 detik (77%)
+      81/86 detik (94%)
+      85/86 detik (99%)
+   ⏱️ gambar selesai dalam 123 dtk
+SELESAI telunjuk_saat_tahiyat: 85.9 dtk video, render 254 dtk
+RENDER hidung_saat_sujud
+   🎙️ narasi (edge-tts)…
+   🎚️ durasi 74 dtk → kecepatan suara -2% → -10% (target ±92 dtk)
+   ⏱️ durasi 78.5 detik, 11 adegan, 2356 frame
+   🎭 cerita stickman: A = tokoh utama (pria); B = teman (pria) · nuansa senja
+   🖌️ menggambar frame paralel di 8 proses…
+      0/79 detik (0%)
+      8/79 detik (10%)
+      17/79 detik (21%)
+      32/79 detik (40%)
+      42/79 detik (53%)
+      55/79 detik (70%)
+      65/79 detik (82%)
+      77/79 detik (97%)
+   ⏱️ gambar selesai dalam 112 dtk
+SELESAI hidung_saat_sujud: 78.5 dtk video, render 242 dtk
+RENDER jari_kaki_saat_sujud
+   🎙️ narasi (edge-tts)…
+   🎚️ durasi 71 dtk → kecepatan suara -2% → -10% (target ±92 dtk)
+   ⏱️ durasi 76.0 detik, 11 adegan, 2281 frame
+   🎭 cerita stickman: A = teman (pria); B = teman (pria) · nuansa senja
+   🖌️ menggambar frame paralel di 8 proses…
+      0/76 detik (0%)
+      8/76 detik (10%)
+      16/76 detik (21%)
+      31/76 detik (40%)
+      40/76 detik (52%)
+      54/76 detik (71%)
+      63/76 detik (82%)
+      74/76 detik (97%)
+   ⏱️ gambar selesai dalam 112 dtk
+SELESAI jari_kaki_saat_sujud: 76.0 dtk video, render 226 dtk

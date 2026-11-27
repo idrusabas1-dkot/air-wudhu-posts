@@ -1,0 +1,145 @@
+[
+  {
+    "id": "20261115_220318_8ef1",
+    "kind": "render",
+    "summary": "Render video · Ngupil saat puasa atau wudhu langsung batal? Cek hukumnya",
+    "status": "done",
+    "pid": 2176,
+    "project": "20261115_214951_ngupil-saat-puasa-atau-wudhu-l",
+    "started": "2026-11-15 22:03:18",
+    "finished": "2026-11-15 22:16:26",
+    "exit_code": 0
+  },
+  {
+    "id": "20261115_215041_c45b",
+    "kind": "script",
+    "summary": "Tulis naskah · Ngupil saat puasa atau wudhu langsung batal? Cek hukumnya",
+    "status": "done",
+    "pid": 8284,
+    "project": "20261115_214951_ngupil-saat-puasa-atau-wudhu-l",
+    "started": "2026-11-15 21:50:41",
+    "finished": "2026-11-15 22:02:21",
+    "exit_code": 0
+  },
+  {
+    "id": "20261115_214951_9107",
+    "kind": "research",
+    "summary": "Riset bahan · Ngupil saat puasa atau wudhu langsung batal? Cek hukumnya",
+    "status": "done",
+    "pid": 24868,
+    "project": "20261115_214951_ngupil-saat-puasa-atau-wudhu-l",
+    "started": "2026-11-15 21:49:51",
+    "finished": "2026-11-15 21:50:11",
+    "exit_code": 0
+  },
+  {
+    "id": "20261115_183425_0768",
+    "kind": "render",
+    "summary": "Render video · Mengelap air wudhu pakai handuk itu makruh? Ini faktanya!",
+    "status": "done",
+    "pid": 23736,
+    "project": "20261115_180440_mengelap-air-wudhu-pakai-handu",
+    "started": "2026-11-15 18:34:25",
+    "finished": "2026-11-15 18:37:50",
+    "exit_code": 0
+  },
+  {
+    "id": "20261115_180608_9c89",
+    "kind": "script",
+    "summary": "Tulis naskah · Mengelap air wudhu pakai handuk itu makruh? Ini faktanya!",
+    "status": "done",
+    "pid": 1992,
+    "project": "20261115_180440_mengelap-air-wudhu-pakai-handu",
+    "started": "2026-11-15 18:06:08",
+    "finished": "2026-11-15 18:32:49",
+    "exit_code": 0
+  },
+  {
+    "id": "20261115_180506_da36",
+    "kind": "research",
+    "summary": "Riset bahan · Mengelap air wudhu pakai handuk itu makruh? Ini faktanya!",
+    "status": "done",
+    "pid": 26756,
+    "project": "20261115_180440_mengelap-air-wudhu-pakai-handu",
+    "started": "2026-11-15 18:05:06",
+    "finished": "2026-11-15 18:05:15",
+    "exit_code": 0
+  },
+  {
+    "id": "20261115_180440_eb9c",
+    "kind": "research",
+    "summary": "Riset bahan · Mengelap air wudhu pakai handuk itu makruh? Ini faktanya!",
+    "status": "done",
+    "pid": 21868,
+    "project": "20261115_180440_mengelap-air-wudhu-pakai-handu",
+    "started": "2026-11-15 18:04:40",
+    "finished": "2026-11-15 18:04:50",
+    "exit_code": 0
+  },
+  {
+    "id": "20261115_095819_4a42",
+    "kind": "upload",
+    "summary": "2 Reels → Air-Wudhu (2026-11-15)",
+    "status": "done",
+    "pid": 2616,
+    "project": "",
+    "started": "2026-11-15 09:58:19",
+    "finished": "2026-11-15 09:58:49",
+    "exit_code": 0
+  },
+  {
+    "id": "20261115_081652_a567",
+    "kind": "render",
+    "summary": "Render video · Mengapa kita harus wudhu sebelum sholat",
+    "status": "done",
+    "pid": 16460,
+    "project": "20261115_005626_mengapa-kita-harus-wudhu-sebel",
+    "started": "2026-11-15 08:16:52",
+    "finished": "2026-11-15 08:21:50",
+    "exit_code": 0
+  },
+  {
+    "id": "20261115_075141_66d0",
+    "kind": "script",
+    "summary": "Tulis naskah · Mengapa kita harus wudhu sebelum sholat",
+    "status": "done",
+    "pid": 13296,
+    "project": "20261115_005626_mengapa-kita-harus-wudhu-sebel",
+    "started": "2026-11-15 07:51:41",
+    "finished": "2026-11-15 08:09:46",
+    "exit_code": 0
+  },
+  {
+    "id": "20261114_215731_a592",
+    "kind": "render",
+    "summary": "Render video · mengapa istri harus patuh sama suami dalam islam",
+    "status": "done",
+    "pid": 5584,
+    "project": "20261114_213145_mengapa-istri-harus-patuh-sama",
+    "started": "2026-11-14 21:57:31",
+    "finished": "2026-11-14 21:58:07",
+    "exit_code": 0
+  },
+  {
+    "id": "20261114_213400_3540",
+    "kind": "script",
+    "summary": "Tulis naskah · mengapa istri harus patuh sama suami dalam islam",
+    "status": "done",
+    "pid": 4300,
+    "project": "20261114_213145_mengapa-istri-harus-patuh-sama",
+    "started": "2026-11-14 21:34:00",
+    "finished": "2026-11-14 21:43:20",
+    "exit_code": 0
+  },
+  {
+    "id": "20261114_213145_dca3",
+    "kind": "research",
+    "summary": "Riset bahan · mengapa istri harus patuh sama suami dalam islam",
+    "status": "done",
+    "pid": 8080,
+    "project": "20261114_213145_mengapa-istri-harus-patuh-sama",
+    "started": "2026-11-14 21:31:45",
+    "finished": "2026-11-14 21:32:30",
+    "exit_code": 0
+  }
+]

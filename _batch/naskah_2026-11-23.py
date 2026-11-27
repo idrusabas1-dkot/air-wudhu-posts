@@ -1,0 +1,196 @@
+"""Naskah harian 2026-11-23 (3 tema fiqih sholat).
+   python _batch/naskah_2026-11-23.py            # cek kutipan
+   python _batch/naskah_2026-11-23.py --save     # simpan + approve
+   python _batch/naskah_2026-11-23.py --render 2026-11-23 fiqih_sholat
+"""
+import sys
+sys.path.insert(0, r"I:\AG\air-wudhu"); sys.path.insert(0, r"I:\AG\air-wudhu\_batch")
+from kisah_tools import *
+
+# ======================================================================== 1. MATA MEREM
+N1 = {
+ "pid": "20261122_171526_mata-merem-saat-sholat-biar-le",
+ "slug": "mata_merem_saat_sholat",
+ "judul_pendek": "Merem saat sholat biar khusyuk, makruh?",
+ "judul": "Mata merem saat sholat biar lebih khusyuk, boleh atau makruh?",
+ "deskripsi": "Kisah ilustrasi: sunnah memandang tempat sujud, perbedaan ulama soal memejamkan mata, dan pengecualian saat ada gangguan pandangan.",
+ "hashtag": ["#AirWudhu", "#NgajiSantai", "#Fiqih", "#Sholat", "#Khusyuk"],
+ "adegan": [
+  {"tipe": "kisah", "narasi": "Fajar selalu memejamkan mata saat sholat, katanya biar lebih khusyuk. Tapi temannya bilang itu makruh. Mana yang benar?",
+   "judul": "Merem saat sholat biar *khusyuk*?", "kunci": ["memejamkan", "makruh"],
+   "shot": shot("musholla", "dorong", [tok("pria", "sholat")]),
+   "kartu": [ilus("Fajar"), K("label", "mata terpejam", "biru", pada="memejamkan", pos=(470, 1060), ke=[250, 1280])]},
+  {"tipe": "kisah", "narasi": "Sunnahnya, pandangan mata diarahkan ke tempat sujud, supaya lebih khusyuk.", "kunci": ["sujud"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("pendapat", "Disunahkan melanggengkan pandangan mata ke arah tempat sujud supaya lebih khusyu’, sekalipun tuna tentra, sedang shalat dekat Ka’bah, shalat di tempat yang gelap, ataupun shalat jenazah.",
+               "Syekh Zainuddin al-Malibari, Fathul Mu'in", "Sunnahnya", "islam.nu.or.id", pada="Sunnahnya")]},
+  {"tipe": "kisah", "narasi": "Lalu bagaimana dengan memejamkan mata? Ternyata para ulama berbeda pendapat.", "kunci": ["berbeda"],
+   "shot": shot("musholla", "geser", [tok("pria", "mikir")]),
+   "kartu": [K("label", "makruh?", "merah", pada="berbeda", pos=(540, 420)),
+             K("label", "tidak makruh?", "hijau", pada="pendapat", pos=(540, 540))]},
+  {"tipe": "kisah", "narasi": "Syekh Nawawi Banten memasukkannya dalam perkara makruh. Alasannya, saat sujud, bulu mata pun dianjurkan ikut bersujud.",
+   "kunci": ["makruh", "bulu"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("pendapat", "Ketujuh, memejamkan mata sementara tidak ada kekhawatiran terhadap bahaya. Pasalnya, pada saat sujud, bulu mata pun dianjurkan turut bersujud bersama anggota lainnya.",
+               "Syekh Nawawi al-Bantani, Kasyifatus Saja", "Makruh", "islam.nu.or.id", pada="Syekh")]},
+  {"tipe": "kisah", "narasi": "Tapi tidak makruh bila ada gangguan pandangan, misalnya sholat menghadap dinding atau gambar yang mengganggu.",
+   "kunci": ["gangguan", "gambar"],
+   "shot": shot("kitab", "geser", fokus=(450, 1250)),
+   "kartu": [K("pendapat", "Begitu pula jika shalat di depan dinding atau gambar yang dapat mengganggu kekhusyukan shalat, maka tidak makruh untuk dipejamkan.",
+               "Kasyifatus Saja", "Kecuali", "islam.nu.or.id", pada="Tapi")]},
+  {"tipe": "kisah", "narasi": "Ibnul Qayyim menjelaskan, kalau membuka mata tidak mengganggu khusyuk, itulah yang lebih utama.", "kunci": ["utama"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("pendapat", "Kesimpulan yang benar, jika membuka mata (ketika shalat) tidak mengganggu kekhusyuan, maka ini yang lebih afdhal.",
+               "Ibnul Qayyim, Zadul Ma'ad", "Lebih utama", "konsultasisyariah.com", pada="Ibnul")]},
+  {"tipe": "kisah", "narasi": "Sedangkan menurut pendapat yang dipilih Imam an-Nawawi, memejamkan mata tidak makruh selama tidak dikhawatirkan bahaya.",
+   "kunci": ["Nawawi"],
+   "shot": shot("kitab", "turun", fokus=(450, 1200)),
+   "kartu": [K("pendapat", "Adapun memejamkan mata dalam shalat, menurut pendapat yang dipilih, hal tersebut tidak dimakruhkan apabila tidak dikhawatirkan menimbulkan bahaya.",
+               "Imam an-Nawawi", "Tidak makruh", "bincangsyariah.com", pada="Sedangkan")]},
+  {"tipe": "kisah", "narasi": "Adapun hadits larangan memejamkan mata yang sering beredar, dinilai dhaif oleh para ahli hadits.", "kunci": ["dhaif"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("kutipan", "Kesimpulannya, hadis di atas adalah hadis dhaif dan Imam ad-Dzahabi (w. 748 H) menilainya munkar.",
+               "Ustadz Ammi Nur Baits", sumber="konsultasisyariah.com", pada="hadits")]},
+  {"tipe": "kisah", "narasi": "Yang jelas, perkara makruh tidak membatalkan sholat, kecuali bila sengaja mempermainkan sholat.", "kunci": ["membatalkan"],
+   "shot": shot("musholla", "dorong", [tok("pria", "lega")]),
+   "kartu": [K("kutipan", "Tidak sampai membatalkan shalat, kecuali memang dilakukan secara sengaja seraya mempermainkan shalat.",
+               "Ustadz M. Tatam Wijaya", sumber="islam.nu.or.id", pada="makruh")]},
+  {"tipe": "kisah", "narasi": "Fajar pun mencoba menatap tempat sujud. Ternyata hatinya tetap tenang.", "kunci": ["tenang"],
+   "shot": shot("musholla", "mundur", [tok("pria", "sholat_gerak")]),
+   "kartu": [ilus("Fajar")]},
+  {"tipe": "penutup", "narasi": "Kamu sholat dengan mata terbuka, atau terpejam? Tulis di komentar, ya.",
+   "tanya": "Saat sholat, matamu?", "a": "Terbuka", "b": "Terpejam"},
+ ]}
+
+# ======================================================================== 2. AL-FATIHAH DALAM HATI
+N2 = {
+ "pid": "20261122_171527_membaca-al-fatihah-dalam-hati",
+ "slug": "fatihah_dalam_hati",
+ "judul_pendek": "Baca Al-Fatihah dalam hati, sholat sah?",
+ "judul": "Membaca Al-Fatihah dalam hati tanpa suara bikin sholat tidak sah?",
+ "deskripsi": "Kisah ilustrasi: membaca berbeda dengan membatin, syarat bacaan rukun terdengar telinga sendiri (Syafi'iyah), dan pendapat Malikiyah soal gerak lisan.",
+ "hashtag": ["#AirWudhu", "#NgajiSantai", "#Fiqih", "#Sholat", "#AlFatihah"],
+ "adegan": [
+  {"tipe": "kisah", "narasi": "Bayu sholat sendirian. Al-Fatihah ia baca dalam hati saja, bibirnya diam. Sholatnya sah atau tidak?",
+   "judul": "Baca Al-Fatihah *dalam hati*, sah?", "kunci": ["hati", "diam"],
+   "shot": shot("musholla", "dorong", [tok("pria", "sholat", baju=BIRU)]),
+   "kartu": [ilus("Bayu"), K("balon", "Cukup dalam hati, kan?", "kiri", pada="hati", pos=(400, 960))]},
+  {"tipe": "kisah", "narasi": "Al-Fatihah adalah rukun sholat. Rasulullah bersabda, tidak sah sholat orang yang tidak membaca Al-Fatihah.",
+   "kunci": ["rukun"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("hadits", "Tidak sah shalatnya orang yang tak membaca surat Al-Fatihah.",
+               "HR. Muslim", "Hadits", "jatim.nu.or.id", pada="bersabda")]},
+  {"tipe": "kisah", "narasi": "Masalahnya, membaca itu berbeda dengan membatin.", "kunci": ["membatin"],
+   "shot": shot("musholla", "geser", [tok("pria", "mikir", baju=BIRU)]),
+   "kartu": [K("kutipan", "Membaca bacaan shalat tidak sama dengan membatin bacaan shalat.",
+               "Ustadz Muhamad Hanif Rahman", sumber="islam.nu.or.id", pada="membaca")]},
+  {"tipe": "kisah", "narasi": "Dalam mazhab Syafi'i, setiap huruf Al-Fatihah harus terdengar oleh telinga sendiri, bila pendengarannya normal.",
+   "kunci": ["terdengar", "telinga"],
+   "shot": shot("kitab", "geser", fokus=(450, 1250)),
+   "kartu": [K("pendapat", "Setiap huruf surat Al-Fatihah yang dibaca harus bisa didengar oleh diri sendiri, bila pendengaran orang yang shalat dalam keadaan sehat atau normal.",
+               "Syekh Nawawi Banten, Kasyifatus Saja", "Syarat bacaan", "jatim.nu.or.id", pada="Dalam")]},
+  {"tipe": "kisah", "narasi": "Imam Syafi'i berkata dalam Al-Umm, tidak sah membaca dalam hati sementara lisannya tidak bergerak.",
+   "kunci": ["lisannya"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("pendapat", "Tidak sah mengucapkan bacaan dengan dadanya (dalam hati) dan lisannya tidak bergerak. Sebab, ia wajib menggerakkan lisannya ketika membaca dan memperdengarkan bacaannya kepada dirinya sendiri.",
+               "Imam asy-Syafi'i, Al-Umm 1/95", "Al-Umm", "islam.nu.or.id", pada="Imam")]},
+  {"tipe": "kisah", "narasi": "Jadi, bibir dan lidah bergerak, suaranya pelan, cukup terdengar telinga sendiri.", "kunci": ["bibir", "pelan"],
+   "shot": shot("musholla", "dorong", [tok("pria", "bicara", baju=BIRU)]),
+   "kartu": [K("kutipan", "dalam shalat ada bacaan yang harus diucapakan walaupun secara lirih sekiranyaterdengar oleh telinga sendiri, bukan hanya sekedar dibaca dalam hati.",
+               "Ustadzah Nur Ashriyati", sumber="islam.nu.or.id", pada="Jadi"),
+             K("label", "lirih, bukan dalam hati", "hijau", pada="pelan", pos=(540, 900))]},
+  {"tipe": "kisah", "narasi": "Bukan hanya Al-Fatihah. Takbiratul ihram, tasyahud akhir, dan salam juga harus terdengar sendiri.",
+   "kunci": ["takbiratul", "salam"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("pendapat", "Menurut mazhab Syafi’i terdapat empat bacaan shalat yang wajib terdengar oleh orang yang shalat baik ia shalat sendiri atau shalat berjamaah.",
+               "NU Online", "4 bacaan", "islam.nu.or.id", pada="Bukan"),
+             K("label", "takbir · Al-Fatihah · tasyahud · salam", "biru", pada="salam", pos=(540, 880))]},
+  {"tipe": "kisah", "narasi": "Mazhab Maliki lebih longgar. Cukup menggerakkan lisan, meski tidak sampai terdengar.", "kunci": ["Maliki"],
+   "shot": shot("kitab", "turun", fokus=(450, 1200)),
+   "kartu": [K("pendapat", "Mazhab Syafi‘i mensyaratkan bacaan dilafalkan dengan lisan dan terdengar oleh diri sendiri, sedangkan dalam Mazhab Maliki, gerakan lisan sudah dianggap cukup, meskipun bacaan tidak sampai terdengar oleh diri sendiri.",
+               "LBM NU Purworejo", "Beda mazhab", "islam.nu.or.id", pada="Maliki")]},
+  {"tipe": "kisah", "narasi": "Tapi keduanya sepakat, sekadar membatin tanpa menggerakkan lisan tidak dianggap membaca.", "kunci": ["sepakat"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("pendapat", "Namun, perlu ditegaskan bahwa kedua pendapat tersebut sama-sama mengharuskan adanya gerakan lisan dalam membaca. Dengan demikian, sekadar membatin bacaan tanpa menggerakkan lisan tidak dianggap sebagai membaca.",
+               "LBM NU Purworejo", "Sama-sama", "islam.nu.or.id", pada="sepakat")]},
+  {"tipe": "kisah", "narasi": "Bayu pun memperbaiki sholatnya. Kali ini bibirnya bergerak, bacaannya lirih terdengar.", "kunci": ["lirih"],
+   "shot": shot("musholla", "mundur", [tok("pria", "sholat_gerak", baju=BIRU)]),
+   "kartu": [ilus("Bayu")]},
+  {"tipe": "penutup", "narasi": "Saat membaca Al-Fatihah, bibirmu ikut bergerak? Tulis di komentar, ya.",
+   "tanya": "Baca Al-Fatihah?", "a": "Bibir bergerak", "b": "Dalam hati"},
+ ]}
+
+# ======================================================================== 3. RUKUK TANPA TUMA'NINAH
+N3 = {
+ "pid": "20261122_171527_rukuk-terlalu-cepat-tanpa-berh",
+ "slug": "rukuk_tanpa_tumaninah",
+ "judul_pendek": "Rukuk kilat tanpa berhenti, sholat sah?",
+ "judul": "Rukuk terlalu cepat tanpa berhenti sebentar, sholatnya tidak sah?",
+ "deskripsi": "Kisah ilustrasi: tuma'ninah sebagai rukun sholat, kadar minimalnya, hadits orang yang sholatnya buruk, dan pendapat Hanafiyah.",
+ "hashtag": ["#AirWudhu", "#NgajiSantai", "#Fiqih", "#Sholat", "#Tumaninah"],
+ "adegan": [
+  {"tipe": "kisah", "narasi": "Arif sholat terburu-buru. Baru membungkuk rukuk, langsung bangun lagi. Sholatnya sah atau tidak?",
+   "judul": "Rukuk *kilat*, sholat sah?", "kunci": ["terburu-buru", "rukuk"],
+   "shot": shot("musholla", "dorong", [tok("pria", "ruku", baju=HIJAU)]),
+   "kartu": [ilus("Arif"), K("label", "rukuk kilat", "merah", pada="rukuk", pos=(470, 1060), ke=[260, 1400])]},
+  {"tipe": "kisah", "narasi": "Ada satu rukun yang sering dilalaikan, yaitu tuma'ninah. Artinya diam sejenak setelah gerakan.",
+   "kunci": ["tuma'ninah"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("pendapat", "Tuma’ninah adalah diam sesudah gerakan sebelumnya, sekira-kira semua anggota badan tetap (tidak bergerak) dengan kadar waktu lamanya membaca bacaan tasbih (subhanallah).",
+               "Syekh Salim al-Hadrami, Safinatun Najah", "Tuma'ninah", "lampung.nu.or.id", pada="Artinya")]},
+  {"tipe": "kisah", "narasi": "Rasulullah bersabda, rukuklah sampai engkau tenang dalam keadaan rukuk.", "kunci": ["tenang"],
+   "shot": shot("kitab", "geser", fokus=(450, 1250)),
+   "kartu": [K("hadits", "Kemudian ruku’lah sampai engkau tenang (tuma’ninah) dalam keadaan ruku’.",
+               "HR. Bukhari", "Hadits", "islam.nu.or.id", pada="bersabda")]},
+  {"tipe": "kisah", "narasi": "Berapa lama? Minimal selama membaca Subhanallah.", "kunci": ["Subhanallah"],
+   "shot": shot("musholla", "dorong", [tok("pria", "ruku", baju=HIJAU)]),
+   "kartu": [K("kutipan", "Orang yang melakukan ruku’ harus disertai dengan tuma’ninah yang berarti tubuhnya yang merunduk itu harus tenang terdiam minimal selama bacaan kalimat tasbih subhânallâh.",
+               "NU Online", sumber="islam.nu.or.id", pada="Berapa"),
+             K("label", "minimal 1x Subhanallah", "hijau", pada="Subhanallah", pos=(540, 900))]},
+  {"tipe": "kisah", "narasi": "Ada seorang laki-laki yang sholat dengan cepat. Rasulullah menyuruhnya kembali, karena ia dianggap belum sholat.",
+   "kunci": ["belum"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("hadits", "Kembalilah dan ulangi shalatmu, karena sesungguhnya kamu belum shalat.",
+               "HR. Bukhari 793, Muslim 397", "Hadits", "hadits.id", pada="Rasulullah")]},
+  {"tipe": "kisah", "narasi": "Bahkan, pencuri paling buruk adalah yang mencuri sholatnya, tidak sempurna rukuk dan sujudnya.", "kunci": ["pencuri"],
+   "shot": shot("kitab", "turun", fokus=(450, 1200)),
+   "kartu": [K("hadits", "Pencuri yang paling jelek adalah orang yang mencuri shalatnya.",
+               "HR. Ibnu Abi Syaibah", "Hadits", "muslim.or.id", pada="pencuri"),
+             K("label", "rukuk & sujud tidak sempurna", "merah", pada="sempurna", pos=(540, 860))]},
+  {"tipe": "kisah", "narasi": "Karena itu, ulama Syafi'iyah dan Hanabilah menetapkan tuma'ninah sebagai rukun sholat.", "kunci": ["rukun"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("pendapat", "Ulama Syafi’iyyah dan Hanbilah, Abu Yusuf al-Hanfiyyah dan Ibnu Hajib Al-Malikiyyah berpandapat bahwa tuma’ninah adalah rukun shalat berdasarksan hadits Al-Musi’ fi Shalatih.",
+               "Al-Mausu'ah Al-Fiqhiyyah 30/96", "Rukun", "muslim.or.id", pada="Karena")]},
+  {"tipe": "kisah", "narasi": "Kalau rukun ini ditinggalkan, sengaja ataupun tidak, sholatnya tidak sah.", "kunci": ["tidak sah"],
+   "shot": shot("musholla", "geser", [tok("pria", "kaget", baju=HIJAU)]),
+   "kartu": [K("kutipan", "Pendapat terkuat tuma’ninah adalah rukun dari shalat, sehingga apabila ditinggalkan baik secara sengaja atau tidak sengaja, maka shalatnya tidak sah.",
+               "muslim.or.id", sumber="muslim.or.id", pada="ditinggalkan")]},
+  {"tipe": "kisah", "narasi": "Mazhab Hanafi memandangnya wajib, bukan rukun. Sholat tetap sah, tapi berdosa.", "kunci": ["Hanafi"],
+   "shot": shot("kitab", "dorong"),
+   "kartu": [K("pendapat", "Sebagian ulama (seperti madzhab Hanafi) berpendapat bahwa thuma'ninah adalah wajib (jika ditinggalkan, shalat tetap sah tetapi berdosa).",
+               "Penjelasan hadits Bukhari 389", "Hanafiyah", "hadits.id", pada="Hanafi")]},
+  {"tipe": "kisah", "narasi": "Jadi, sholat cepat itu boleh, asalkan syarat dan rukunnya terpenuhi, termasuk tuma'ninah.", "kunci": ["asalkan"],
+   "shot": shot("kitab", "geser", fokus=(450, 1250)),
+   "kartu": [K("kutipan", "Selama syarat dan rukun shalat terpenuhi dengan baik, maka shalat apapun hukumnya sah secara fiqh",
+               "NU Online", sumber="islam.nu.or.id", pada="Jadi")]},
+  {"tipe": "kisah", "narasi": "Arif pun mengulang sholatnya. Rukuknya tenang, Subhanallah, baru ia bangkit.", "kunci": ["tenang"],
+   "shot": shot("musholla", "mundur", [tok("pria", "sholat_gerak", baju=HIJAU)]),
+   "kartu": [ilus("Arif")]},
+  {"tipe": "penutup", "narasi": "Rukukmu sudah tuma'ninah, atau masih sering buru-buru? Tulis di komentar, ya.",
+   "tanya": "Rukukmu selama ini?", "a": "Sudah tenang", "b": "Buru-buru"},
+ ]}
+
+
+NASKAH = [N1, N2, N3]
+
+if __name__ == "__main__":
+    if "--render" in sys.argv:
+        i = sys.argv.index("--render")
+        render([(N["pid"], N["slug"]) for N in NASKAH], sys.argv[i + 1], sys.argv[i + 2])
+        sys.exit(0)
+    save = "--save" in sys.argv
+    bad = 0
+    for N in NASKAH:
+        print("##", N["judul"])
+        bad += verify_and_save(N, save)
+    sys.exit(1 if bad else 0)

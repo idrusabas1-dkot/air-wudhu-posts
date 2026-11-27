@@ -1,0 +1,51 @@
+📑 Tahap 1: mengutip fakta & dalil per bahan (10 bahan)…
+   [1/10] liputan6.com: 4 kutipan
+   [2/10] detik.com: 3 kutipan
+   [3/10] detik.com: 5 kutipan
+   ⚠️ percobaan 1: Expecting ',' delimiter: line 2 column 219 (char 220)
+   [4/10] cnbcindonesia.com: 7 kutipan
+   [5/10] kumparan.com: 4 kutipan
+   [6/10] cnnindonesia.com: 5 kutipan
+   [7/10] kotayogya.baznas.go.id: 8 kutipan
+   [8/10] islamposmedia.com: 3 kutipan
+   [9/10] cnnindonesia.com: 6 kutipan
+   [10/10] lamongan.pikiran-rakyat.com: 4 kutipan
+   📜 1 hadits & 1 ayat disalin langsung dari bahan
+   46 kutipan cocok dengan bahan, 3 dibuang (tidak ditemukan di bahan)
+🧱 Kerangka (satu pendapat): pembuka → pengantar → penjelasan → penjelasan → hikmah → langkah → penjelasan → kesimpulan → penutup
+   🧩 adegan 1: pembuka
+   🧩 adegan 2: pengantar
+   🧩 adegan 3: penjelasan
+   🧩 adegan 4: penjelasan
+   🧩 adegan 5: hikmah
+   ⚠️ percobaan 1: narasi kosong
+   ⚠️ percobaan 2: narasi kosong
+      ⚠️ AI gagal (LLM gagal: narasi kosong) — pakai kutipan bahan
+   🧩 adegan 6: langkah
+   🧩 adegan 7: penjelasan
+   🧩 adegan 8: kesimpulan
+   🧩 adegan 9: penutup
+   🧹 12 kalimat/label AI dibuang karena tidak didukung bahan:
+      ✂️ “Ngupil tidak membatalkan puasa asal hanya membersihkan rongga luar hidung.” — kalimat hukum harus mengikuti redaksi bahan
+      ✂️ “Ngupil tidak batal puasanya, asal ngampilin rongga luar aja..” — kalimat hukum harus mengikuti redaksi bahan
+      ✂️ “Ngupil gak otomatis batalin puasa asal wajar, Syafi'i bilang ngampilin hidung dengan jari2 ga batal selama…” — hukum/negasi tidak sama dengan bahan
+      ✂️ “ngampilin hidung ga batalin puasa.” — hanya 33% kata ada di bahan
+      ✂️ “Ngupil selama puasa boleh asal tidak melebihi batang hidung.” — hukum/negasi tidak sama dengan bahan
+      ✂️ “Hukumnya tidak batal.” — kalimat hukum harus mengikuti redaksi bahan
+      ✂️ “Ngupil gak batal asal nggak masuk dalam hidung..” — kalimat hukum harus mengikuti redaksi bahan
+      ✂️ “Kalau ngupil di bagian luar, gak batal.” — kalimat hukum harus mengikuti redaksi bahan
+      ✂️ “Tapi kalau ke dalam, harus hati-hati.” — hanya 0% kata ada di bahan
+      ✂️ “Jika hanya luar, aman aja.” — kalimat hukum harus mengikuti redaksi bahan
+      ✂️ “Ngupil nggak bikin puasa batal kalau kotorannya masih basah.” — kalimat hukum harus mengikuti redaksi bahan
+      ✂️ “ngupil tidak membatalkan puasa jika kotoran masih basah..” — kalimat hukum harus mengikuti redaksi bahan
+   naskah: 167 kata, 9 adegan (target 190)
+🔍 Verifikasi dalil: semua dalil cocok dengan sumber
+   1. [tanya] Ngupil saat puasa atau wudhu langsung batal? Yuk, kita lihat apa kata ulama dan dalilnya.
+   2. [bicara] Ngupil atau membersihkan kotoran hidung tidak membatalkan puasa. Sebab, ngupil dilakukan p
+   3. [bicara] Mengupil tidak otomatis membatalkan puasa selama dilakukan secara wajar dan tidak sampai m
+   4. [bicara] Selama orang tersebut memasukkan benda ke hidung seperti mengupil tapi tidak melebihi bata
+   5. [bicara] Penting untuk diingat bahwa pembatalan puasa terjadi jika tindakan tersebut dilakukan seca
+   6. [langkah] Jika seseorang secara sadar mengupil, maka perbuatan tersebut termasuk tindakan yang disen
+   7. [bicara] Tapi kalau udah ke bagian dalam hidung atau pangkalnya, ya sudah.
+   8. [fakta] Salah satu rujukan menyimpulkan: Kitab Fathul Qadir & Matan Abi Syuja’. Kalau disini dijel
+   9. [penutup] Semoga bermanfaat. Sudah tahu sebelumnya? Tulis di komentar, ya.
